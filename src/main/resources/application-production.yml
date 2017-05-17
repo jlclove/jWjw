@@ -1,0 +1,15 @@
+# DATASOURCE
+com.goodlaike.wjw.datasource: 
+    url: jdbc:mysql://10.8.1.112;DatabaseName=agencyjizhong;autoReconnect=true&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: root
+    driverClassName: com.mysql.jdbc.Driver
+    max-active: 10
+    max-idle: 5
+    min-idle: 5
+    initial-size: 5
+    max-wait: 10000
+    testWhileIdle: true
+    validationQuery: select 1
+    validationQueryTimeout: 1
+    validationInterval: 120000

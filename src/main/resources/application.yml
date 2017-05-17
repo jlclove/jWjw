@@ -1,0 +1,19 @@
+#spring active env
+spring:
+    application:
+        name: wjw
+    profiles:
+        active: development
+        
+        
+#server config
+server:
+    tomcat:
+        max-threads: 700
+        uri-encoding: UTF-8
+    compression:
+        enabled: true
+        mime-types: application/json,application/javascript,application/xhtml+xml,text/html,text/xml,text/plain,text/css
+    error.whitelabel.enabled: true # Enable the default error page displayed in browsers in case of a server error.
+    port: 8080
+    
