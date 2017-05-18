@@ -30,6 +30,7 @@
 	</settings>
 
 	<typeAliases>
+		<typeAlias type="com.goodlaike.wjw.view.LoupanListView"/>
 		<package name="com.goodlaike.wjw.model" />
 	</typeAliases>
 

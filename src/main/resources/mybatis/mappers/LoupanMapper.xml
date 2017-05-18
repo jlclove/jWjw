@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="LoupanMapper">
+
+	<!-- 新增楼盘 -->
+	<insert id="insert" parameterType="map">
+		INSERT INTO `loupan`
+		(
+		`name`,
+		`cityName`,
+		`districtName`,
+		`avgPrice`,
+		`address`,
+		`statFunctions`,
+		`structFunctions`,
+		`decoItems`,
+		`ageLimits`,
+		`layouts`,
+		`developerName`,
+		`traffic`,
+		`equipment`,
+		`siteArea`,
+		`buildArea`,
+		`ratio`,
+		`greenRate`,
+		`carRate`,
+		`buildingCnt`,
+		`roomCnt`,
+		`propertyFee`,
+		`propertyName`,
+		`description`,
+		`linkerPhone`,
+		`creator`,
+		`updator`)
+		VALUES
+		(
+		#{name},
+		#{cityName},
+		#{districtName},
+		#{avgPrice},
+		#{address},
+		#{statFunctions},
+		#{structFunctions},
+		#{decoItems},
+		#{ageLimits},
+		#{layouts},
+		#{developerName},
+		#{traffic},
+		#{equipment},
+		#{siteArea},
+		#{buildArea},
+		#{ratio},
+		#{greenRate},
+		#{carRate},
+		#{buildingCnt},
+		#{roomCnt},
+		#{propertyFee},
+		#{propertyName},
+		#{description},
+		#{linkerPhone},
+		#{operator},
+		#{operator});
+		<selectKey keyProperty="id" resultType="long">
+			select @@IDENTITY
+		</selectKey>
+	</insert>
+	
+	
+	<!-- 更新楼盘 -->
+	<update id="update" parameterType="map">
+	UPDATE `loupan` SET
+					`districtName` = #{districtName},
+					`avgPrice` = #{avgPrice},
+					`address` = #{address},
+					`statFunctions` = #{statFunctions},
+					`structFunctions` = #{structFunctions},
+					`decoItems` = #{decoItems},
+					`ageLimits` = #{ageLimits},
+					`developerName` = #{developerName},
+					`traffic` = #{traffic},
+					`equipment` = #{equipment},
+					`siteArea` = #{siteArea},
+					`buildArea` = #{buildArea},
+					`ratio` = #{ratio},
+					`greenRate` = #{greenRate},
+					`carRate` = #{carRate},
+					`buildingCnt` = #{buildingCnt},
+					`roomCnt` = #{roomCnt},
+					`propertyFee` = #{propertyFee},
+					`propertyName` = #{propertyName},
+					`description` = #{description},
+					`linkerPhone` = #{linkerPhone},
+					`updator` = #{operator},
+					`updateTime` = now()
+				WHERE `id` = #{id};
+	</update>
+
+	<!-- 根据id获得楼盘 -->
+	<select id="findById" resultType="loupan" parameterType="long">
+		select * from loupan where id = #{id} and status = 0
+	</select>
+
+	<!-- 逻辑删除楼盘 -->
+	<update id="delete" parameterType="map">
+		update loupan set `status` = 9,
+						`updator` = #{updator},
+						`updateTime` = now()
+		where id = #{id} and status = 0
+	</update>
+
+	<select id="findList" parameterType="map" resultType="loupanListView">
+		select id,name,avgPrice,layouts,districtName,address
+		from loupan
+		where status = 0
+		<if test="name!=null">
+			and name like concat(#{name},'%')
+		</if>
+		<if test="cityName!=null">
+			and cityName = #{cityName}
+		</if>
+		<if test="districtName!=null">
+			and districtName = #{districtName}
+		</if>
+		<if test="layouts!=0">
+			and layouts&amp;${layouts}=${layouts}
+		</if>
+		order by 
+		<if test="order!=null">
+			#{order},
+		</if>
+		updateTime desc
+		limit #{indexStart}, #{pageSize}
+	</select>
+</mapper>

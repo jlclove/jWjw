@@ -48,7 +48,7 @@
 		update user set `status` = 9,
 						`updator` = #{updator},
 						`updateTime` = now()
-		where id = #{id}
+		where id = #{id} and status = 0
 	</update>
 
 	<!-- 修改密码 -->

@@ -25,7 +25,7 @@ class UserDao extends DaoManagement {
    * @return {@link User}
    * @author jail
    */
-  public User findUser(int id) {
+  public User findById(int id) {
     return super.sqlSessionCommon.selectOne("UserMapper.findById", id);
   }
 
@@ -37,7 +37,7 @@ class UserDao extends DaoManagement {
    * @return {@link User}
    * @author jail
    */
-  public User findUser(int id, String password) {
+  public User findById2(int id, String password) {
     Map<String, Object> map = new HashMap<>();
     map.put("id", id);
     map.put("password", password);
@@ -54,7 +54,7 @@ class UserDao extends DaoManagement {
    * @return {@link User}
    * @author jail
    */
-  public User findUser(String userName, String password) {
+  public User findByUserName(String userName, String password) {
     Map<String, Object> map = new HashMap<>();
     map.put("userName", userName);
     map.put("password", password);
@@ -73,7 +73,7 @@ class UserDao extends DaoManagement {
    * @version v1
    * @since 2017年5月17日 下午11:00:10
    */
-  public int addUser(String userName, String salt, String password, int operator) {
+  public int insert(String userName, String salt, String password, int operator) {
     Map<String, Object> map = new HashMap<>();
     map.put("userName", userName);
     map.put("password", password);

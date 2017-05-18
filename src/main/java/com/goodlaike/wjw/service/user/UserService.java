@@ -45,39 +45,56 @@ public class UserService {
   /**
    * 根据用户名与密码获得用户
    *
-   * @see UserDao#findUser(String, String)
+   * @see UserDao#findByUserName(String, String)
    */
   public User findUser(String userName, String password) {
-    return this.userDao.findUser(userName, password);
+    return this.userDao.findByUserName(userName, password);
   }
 
   /**
    * 根据用户ID与密码 获得用户
    *
-   * @see UserDao#findUser(id, String)
+   * @see UserDao#findById2(id, String)
    */
   private User findUser(int id, String password) {
-    return this.userDao.findUser(id, password);
+    return this.userDao.findById2(id, password);
   }
 
   /**
    * 获得用于显示用的用户视图
    */
   public UserView findUserView(int id) {
-    User user = this.findUser(id);
-    UserView view = new UserView();
-    BeanUtils.copyProperties(user, view);
-    return view;
+    return this.convertView(this.findUser(id));
+  }
+
+  /**
+   * 登录并返回用户
+   *
+   * @see #findUser(String, String)
+   */
+  public UserView login(String userName, String password) {
+    return this.convertView(this.findUser(userName, password));
+  }
+
+
+  private UserView convertView(User user) {
+    if (user == null) {
+      return null;
+    } else {
+      UserView view = new UserView();
+      BeanUtils.copyProperties(user, view);
+      return view;
+    }
   }
 
 
   /**
    * 根据用户ID 获得用户
    * 
-   * @see UserDao#findUser(int)
+   * @see UserDao#findById(int)
    */
   private User findUser(int id) {
-    return this.userDao.findUser(id);
+    return this.userDao.findById(id);
   }
 
 
@@ -90,7 +107,7 @@ public class UserService {
     Assert.hasText(userName, "用户名不能为空");
     Assert.isTrue(password != null && password.length() > 5 && password.length() < 17, "密码不能为空且为6-16个字符");
     Assert.isTrue(!this.userNameExist(userName, null), "用户名已存在");
-    return this.userDao.addUser(userName, RandomUtil.getUUID(), password, operator);
+    return this.userDao.insert(userName, RandomUtil.getUUID(), password, operator);
   }
 
 
