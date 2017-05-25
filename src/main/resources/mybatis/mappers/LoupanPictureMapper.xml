@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="LoupanPictureMapper">
+
+	<!-- 根据楼盘id获得图片 -->
+	<select id="findByLoupanId" resultType="loupanPicture" parameterType="long">
+		select * from loupan_picture where loupanId = #{loupanId}
+	</select>
+
+	<!-- 删除楼盘照片 -->
+	<delete id="delete" parameterType="list">
+		delete loupan_picture 
+		where id in 
+		<foreach collection="list" item="pid" separator="," open="(" close=")">
+			#{pid}
+		</foreach>
+	</delete>
+	
+	<insert id="insert" parameterType="map">
+		insert into loupan_picture (loupanId,type,picUrl,main,creator)
+		values
+		<foreach collection="picList" item="pic" separator=",">
+			(#{pic.loupanId},#{pic.type},#{pic.picUrl},#{pic.main},#{operator})
+		</foreach>
+	</insert>
+
+	<update id="setMain" parameterType="long">
+		update loupan_picture as p1,(select loupanId from loupan_picture where id = #{id}) as p2
+			   set p1.main = 0
+		where p1.loupanId = p2.loupanId;
+	</update>
+	
+	<update id="setMain2" parameterType="long">
+		update loupan_picture set main = 1 where id = #{id};
+	</update>
+</mapper>

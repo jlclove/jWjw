@@ -58,6 +58,7 @@ class LoupanDao extends DaoManagement {
    * @param propertyName 物业公司
    * @param description 描述
    * @param linkerPhone 案场电话
+   * @param flag 标签聚合值
    * @param operator 操作人ID
    * @return long
    * @author Jail Hu
@@ -67,7 +68,7 @@ class LoupanDao extends DaoManagement {
   public long insert(String name, String cityName, String districtName, Double avgPrice, String address, int statFunctions,
       int structFunctions, int decoItems, int ageLimits, int layouts, String developerName, String traffic, String equipment,
       Double siteArea, Double buildArea, Double ratio, Double greenRate, String carRate, Integer buildingCnt, Integer roomCnt,
-      Double propertyFee, String propertyName, String description, String linkerPhone, int operator) {
+      Double propertyFee, String propertyName, String description, String linkerPhone, int flag, int operator) {
     Map<String, Object> params = new HashMap<>(32);
     params.put("name", name);
     params.put("cityName", cityName);
@@ -93,6 +94,7 @@ class LoupanDao extends DaoManagement {
     params.put("propertyName", propertyName);
     params.put("description", description);
     params.put("linkerPhone", linkerPhone);
+    params.put("flag", flag);
     params.put("operator", operator);
     super.sqlSessionCommon.insert("LoupanMapper.insert", params);
     return (Long) params.get("id");
@@ -166,6 +168,7 @@ class LoupanDao extends DaoManagement {
    * @param propertyName 物业公司
    * @param description 描述
    * @param linkerPhone 案场电话
+   * @param flag 标签聚合值
    * @param operator 操作人ID
    * @return long
    * @author Jail Hu
@@ -175,7 +178,7 @@ class LoupanDao extends DaoManagement {
   public long update(long id, String districtName, Double avgPrice, String address, int statFunctions, int structFunctions, int decoItems,
       int ageLimits, int layouts, String developerName, String traffic, String equipment, Double siteArea, Double buildArea, Double ratio,
       Double greenRate, String carRate, Integer buildingCnt, Integer roomCnt, Double propertyFee, String propertyName, String description,
-      String linkerPhone, int operator) {
+      String linkerPhone, int flag, int operator) {
     Map<String, Object> params = new HashMap<>(32);
     params.put("id", id);
     params.put("districtName", districtName);
@@ -200,6 +203,7 @@ class LoupanDao extends DaoManagement {
     params.put("propertyName", propertyName);
     params.put("description", description);
     params.put("linkerPhone", linkerPhone);
+    params.put("flag", flag);
     params.put("operator", operator);
     return super.sqlSessionCommon.update("LoupanMapper.update", params);
   }

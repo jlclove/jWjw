@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.goodlaike.wjw.dict.AgeLimit;
 import com.goodlaike.wjw.dict.DecoItem;
+import com.goodlaike.wjw.dict.Flag;
 import com.goodlaike.wjw.dict.LayoutType;
 import com.goodlaike.wjw.dict.Order;
 import com.goodlaike.wjw.dict.PictureType;
@@ -42,7 +43,9 @@ public class ConfigService {
     config.put("pictureType",
         Stream.of(PictureType.values()).map((v) -> ImmutableMap.of("name", v.name(), "value", v.name())).collect(Collectors.toList()));
     config.put("orderType",
-      Stream.of(Order.values()).map((v) -> ImmutableMap.of("name", v.name(), "value", v.name())).collect(Collectors.toList()));
+        Stream.of(Order.values()).map((v) -> ImmutableMap.of("name", v.name(), "value", v.name())).collect(Collectors.toList()));
+    config.put("flag",
+        Stream.of(Flag.values()).map((v) -> ImmutableMap.of("name", v.name(), "value", v.name())).collect(Collectors.toList()));
     return config;
   }
 }

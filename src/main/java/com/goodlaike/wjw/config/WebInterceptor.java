@@ -22,14 +22,14 @@ public class WebInterceptor extends WebMvcConfigurerAdapter {
   @Override
   public void addResourceHandlers(ResourceHandlerRegistry registry) {
     CacheControl cacheControl = CacheControl.maxAge(1, TimeUnit.HOURS);
-    registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/").setCacheControl(cacheControl);
+    registry.addResourceHandler("/static/**", "/imgs/**").addResourceLocations("classpath:/static/").setCacheControl(cacheControl);
     super.addResourceHandlers(registry);
   }
 
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
     registry.addInterceptor(loginedInterceptor()).addPathPatterns("/", "/admin/**", "/loupan/**").excludePathPatterns("/loupan", "/loupan/",
-        "/static/**");
+        "/static/**", "/imgs/**");
   }
 
   @Bean

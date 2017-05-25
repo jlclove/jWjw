@@ -63,10 +63,11 @@ public class LoupanController extends BaseController {
       @RequestParam(value = "propertyFee", required = false) Double propertyFee,
       @RequestParam(value = "propertyName", required = false) String propertyName,
       @RequestParam(value = "description", required = false) String description,
-      @RequestParam(value = "linkerPhone", required = false) String linkerPhone, HttpServletRequest request) {
+      @RequestParam(value = "linkerPhone", required = false) String linkerPhone,
+      @RequestParam(value = "flags", required = false) String flags, HttpServletRequest request) {
     return this.loupanService.insert(name, cityName, districtName, avgPrice, address, statFunctions, structFunctions, decoItems, ageLimits,
         layouts, developerName, traffic, equipment, siteArea, buildArea, ratio, greenRate, carRate, buildingCnt, roomCnt, propertyFee,
-        propertyName, description, linkerPhone, super.pollLogined(request).getId());
+        propertyName, description, linkerPhone, flags, super.pollLogined(request).getId());
   }
 
   /**
@@ -97,10 +98,11 @@ public class LoupanController extends BaseController {
       @RequestParam(value = "propertyFee", required = false) Double propertyFee,
       @RequestParam(value = "propertyName", required = false) String propertyName,
       @RequestParam(value = "description", required = false) String description,
-      @RequestParam(value = "linkerPhone", required = false) String linkerPhone, HttpServletRequest request) {
+      @RequestParam(value = "linkerPhone", required = false) String linkerPhone,
+      @RequestParam(value = "flags", required = false) String flags, HttpServletRequest request) {
     return this.loupanService.update(id, districtName, avgPrice, address, statFunctions, structFunctions, decoItems, ageLimits, layouts,
         developerName, traffic, equipment, siteArea, buildArea, ratio, greenRate, carRate, buildingCnt, roomCnt, propertyFee, propertyName,
-        description, linkerPhone, super.pollLogined(request).getId());
+        description, linkerPhone, flags, super.pollLogined(request).getId());
   }
 
   /**

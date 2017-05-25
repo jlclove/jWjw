@@ -1,88 +1,41 @@
 package com.goodlaike.wjw.view;
 
+import java.util.List;
+import java.util.Map;
+
+import com.goodlaike.wjw.model.Loupan;
+import com.goodlaike.wjw.model.LoupanPicture;
+
 public class LoupanDetailView {
 
   /**
-   * 主键
+   * 楼盘对象
    */
-  private long id;
+  private Loupan loupan;
 
   /**
-   * 楼盘名
+   * 楼盘图片集合
    */
-  private String name;
+  private Map<Byte, List<LoupanPicture>> picMap;
 
-  /**
-   * 区域名
-   */
-  private String districtName;
-
-  /**
-   * 均价
-   */
-  private Double avgPrice;
-
-  /**
-   * 楼盘地址
-   */
-  private String address;
-
-  /**
-   * 居室集合
-   */
-  private int layouts;
-
-  public long getId() {
-    return this.id;
+  public Loupan getLoupan() {
+    return this.loupan;
   }
 
-  public void setId(long id) {
-    this.id = id;
+  public void setLoupan(Loupan loupan) {
+    this.loupan = loupan;
   }
 
-  public String getName() {
-    return this.name;
+  public Map<Byte, List<LoupanPicture>> getPicMap() {
+    return this.picMap;
   }
 
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public String getDistrictName() {
-    return this.districtName;
-  }
-
-  public void setDistrictName(String districtName) {
-    this.districtName = districtName;
-  }
-
-  public Double getAvgPrice() {
-    return this.avgPrice;
-  }
-
-  public void setAvgPrice(Double avgPrice) {
-    this.avgPrice = avgPrice;
-  }
-
-  public String getAddress() {
-    return this.address;
-  }
-
-  public void setAddress(String address) {
-    this.address = address;
-  }
-
-  public int getLayouts() {
-    return this.layouts;
-  }
-
-  public void setLayouts(int layouts) {
-    this.layouts = layouts;
+  public void setPicMap(Map<Byte, List<LoupanPicture>> picMap) {
+    this.picMap = picMap;
   }
 
   @Override
   public String toString() {
-    return "LoupanListView [id=" + id + ", name=" + name + ", districtName=" + districtName + ", avgPrice=" + avgPrice + ", address="
-        + address + ", layouts=" + layouts + "]";
+    return "LoupanDetailView [loupan=" + loupan + ", picMap=" + picMap + "]";
   }
 }

@@ -139,6 +139,11 @@ public class Loupan implements Serializable {
   private String linkerPhone;
 
   /**
+   * 标签
+   */
+  private int flag;
+
+  /**
    * 状态
    */
   private byte status;
@@ -371,6 +376,14 @@ public class Loupan implements Serializable {
     this.status = status;
   }
 
+  public int getFlag() {
+    return this.flag;
+  }
+
+  public void setFlag(int flag) {
+    this.flag = flag;
+  }
+
   public int getCreator() {
     return this.creator;
   }
@@ -410,7 +423,8 @@ public class Loupan implements Serializable {
         + ", ageLimits=" + ageLimits + ", layouts=" + layouts + ", developerName=" + developerName + ", traffic=" + traffic + ", equipment="
         + equipment + ", siteArea=" + siteArea + ", buildArea=" + buildArea + ", ratio=" + ratio + ", greenRate=" + greenRate + ", carRate="
         + carRate + ", buildingCnt=" + buildingCnt + ", roomCnt=" + roomCnt + ", propertyFee=" + propertyFee + ", propertyName="
-        + propertyName + ", description=" + description + ", linkerPhone=" + linkerPhone + ", status=" + status + ", creator=" + creator
-        + ", createTime=" + createTime + ", updator=" + updator + ", updateTime=" + updateTime + "]";
+        + propertyName + ", description=" + description + ", linkerPhone=" + linkerPhone + ", flag=" + flag + ", status=" + status
+        + ", creator=" + creator + ", createTime=" + createTime + ", updator=" + updator + ", updateTime=" + updateTime + "]";
   }
+
 }

@@ -31,6 +31,11 @@ public class LoupanListView {
    * 居室集合
    */
   private int layouts;
+  
+  /**
+   * 列表主图
+   */
+  private String mainPic;
 
   public long getId() {
     return this.id;
@@ -80,9 +85,17 @@ public class LoupanListView {
     this.layouts = layouts;
   }
 
+  public String getMainPic() {
+    return this.mainPic;
+  }
+
+  public void setMainPic(String mainPic) {
+    this.mainPic = mainPic;
+  }
+
   @Override
   public String toString() {
     return "LoupanListView [id=" + id + ", name=" + name + ", districtName=" + districtName + ", avgPrice=" + avgPrice + ", address="
-        + address + ", layouts=" + layouts + "]";
+        + address + ", layouts=" + layouts + ", mainPic=" + mainPic + "]";
   }
 }

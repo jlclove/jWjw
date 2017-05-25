@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.goodlaike.wjw.BaseTest;
 import com.goodlaike.wjw.dict.DecoItem;
+import com.goodlaike.wjw.dict.Flag;
 import com.goodlaike.wjw.dict.LayoutType;
 
 public class LoupanServiceTest extends BaseTest {
@@ -23,7 +24,8 @@ public class LoupanServiceTest extends BaseTest {
     return this.loupanService.insert("测试楼盘", "上海", "什么区域", null, "这是地址", null, null,
         Arrays.asList(DecoItem.毛坯, DecoItem.精装).stream().map((s) -> s.name()).collect(Collectors.joining(",")), null,
         Arrays.asList(LayoutType.一居, LayoutType.三居, LayoutType.五居).stream().map((s) -> s.name()).collect(Collectors.joining(",")), null,
-        "交通", "设施", 123.5, 1.7, 16.7, null, "乱来", null, null, null, "物业公司", "描述", "13866554411", 1);
+        "交通", "设施", 123.5, 1.7, 16.7, null, "乱来", null, null, null, "物业公司", "描述", "13866554411",
+        Arrays.asList(Flag.热推).stream().map((s) -> s.name()).collect(Collectors.joining(",")), 1);
   }
 
   @Test
@@ -44,7 +46,8 @@ public class LoupanServiceTest extends BaseTest {
     assertTrue(this.loupanService.update(id, "什么区域2", null, "这是地址2", null, null,
         Arrays.asList(DecoItem.毛坯, DecoItem.精装).stream().map((s) -> s.name()).collect(Collectors.joining(",")), null,
         Arrays.asList(LayoutType.一居, LayoutType.三居, LayoutType.五居).stream().map((s) -> s.name()).collect(Collectors.joining(",")), null,
-        "交通2", "设施2", 123.5, 1.7, 16.7, null, "乱来2", null, null, null, "物业公司2", "描述2", "13866554411", 1));
+        "交通2", "设施2", 123.5, 1.7, 16.7, null, "乱来2", null, null, null, "物业公司2", "描述2", "13866554411",
+        Arrays.asList(Flag.热推).stream().map((s) -> s.name()).collect(Collectors.joining(",")), 1));
   }
 
   @Test

@@ -1,26 +1,18 @@
 package com.goodlaike.wjw.controller;
 
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import com.goodlaike.wjw.service.ConfigService;
+@Controller
+public class HomeController  {
 
-@RestController
-public class HomeController {
+  @RequestMapping("/")
+  protected String home() {
+    return "hello";
+  }
 
-  @Autowired
-  private ConfigService configService;
-
-  /**
-   * 获得完整配置
-   * 
-   * @see ConfigService#getFullConfig()
-   */
-  @RequestMapping("/config")
-  protected Map<String, Object> config() {
-    return this.configService.getFullConfig();
+  @RequestMapping("/5000")
+  protected String home2() {
+    return "hello";
   }
 }

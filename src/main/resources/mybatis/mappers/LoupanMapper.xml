@@ -31,6 +31,7 @@
 		`propertyName`,
 		`description`,
 		`linkerPhone`,
+		`flag`,
 		`creator`,
 		`updator`)
 		VALUES
@@ -59,6 +60,7 @@
 		#{propertyName},
 		#{description},
 		#{linkerPhone},
+		#{flag},
 		#{operator},
 		#{operator});
 		<selectKey keyProperty="id" resultType="long">
@@ -91,6 +93,7 @@
 					`propertyName` = #{propertyName},
 					`description` = #{description},
 					`linkerPhone` = #{linkerPhone},
+					`flag` = #{flag},
 					`updator` = #{operator},
 					`updateTime` = now()
 				WHERE `id` = #{id};
@@ -110,26 +113,31 @@
 	</update>
 
 	<select id="findList" parameterType="map" resultType="loupanListView">
-		select id,name,avgPrice,layouts,districtName,address
-		from loupan
-		where status = 0
+		select l.id,l.name,l.avgPrice,l.layouts,l.districtName,l.address,pic.picUrl as mainPic
+		from loupan as l
+		left join (
+			select p1.picUrl,p1.loupanId from loupan_picture as p1
+            left join loupan_picture as p2 on p1.loupanId = p2.loupanId and p1.main > p2.main
+            group by p1.loupanId
+		) as pic on pic.loupanId = l.id
+		where l.status = 0
 		<if test="name!=null">
-			and name like concat(#{name},'%')
+			and l.name like concat(#{name},'%')
 		</if>
 		<if test="cityName!=null">
-			and cityName = #{cityName}
+			and l.cityName = #{cityName}
 		</if>
 		<if test="districtName!=null">
-			and districtName = #{districtName}
+			and l.districtName = #{districtName}
 		</if>
 		<if test="layouts!=0">
-			and layouts&amp;${layouts}=${layouts}
+			and l.layouts&amp;${layouts}=${layouts}
 		</if>
 		order by 
 		<if test="order!=null">
 			#{order},
 		</if>
-		updateTime desc
+		l.flag desc
 		limit #{indexStart}, #{pageSize}
 	</select>
 </mapper>
