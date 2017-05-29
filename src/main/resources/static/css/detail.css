@@ -1,0 +1,79 @@
+.box {
+    background-color: #fff;
+}
+.box + .box {
+    margin-top: 15px;
+}
+.detail-page {
+    padding-bottom: 46px;
+}
+.swiper-container {
+    /*width: 600px;*/
+    height: 230px;
+}
+.swiper-pagination-fraction {
+    width: auto;
+    color: #fff;
+    right: 6px;
+    top: 8px;
+    padding: 0 10px;
+    left: auto;
+    bottom: auto;
+    font-size: 12px;
+    background: rgba(0,0,0,.6);
+    border-radius: 10px;
+}
+.swiper-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0,0,0,.5);
+    color: #fff;
+    z-index: 3;
+}
+.swiper-footer > span {
+    position: relative;
+    display: inline-block;
+    width: 25%;
+    text-align: center;
+    padding: 5px 0;
+    font-size: 13px;
+}
+.swiper-footer > span + span::before {
+    position: absolute;
+    display: block;
+    content: ' ';
+    width: 1px;
+    bottom: 8px;
+    top: 8px;
+    left: 0;
+    background-color: #fff;
+}
+.swiper-back {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    width: 30px;
+    height: 30px;
+    background: url(../img/down.png) no-repeat;
+    background-size: cover;
+    z-index: 3;
+    -webkit-transform: rotateZ(90deg);
+    -moz-transform: rotateZ(90deg);
+    -ms-transform: rotateZ(90deg);
+    -o-transform: rotateZ(90deg);
+    transform: rotateZ(90deg);
+}
+.btn-contact {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #df2f30;
+    color: #fff;
+    padding: 12px 0;
+    text-align: center;
+    font-size: 16px;
+}
+.btn-contact:focus,.btn-contact:hover {
+    color: #fff;
+}

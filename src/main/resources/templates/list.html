@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <title>新房-上海</title>
+    <link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/static/css/app.css"/>
+</head>
+<body>
+    <div id="list-page">
+        <div class="header">
+            <div class="header-item header-left"><i class="glyphicon glyphicon-home"></i></div>
+            <div class="header-item header-center">
+                <a href="">新房 上海 <i class="ic-down"></i></a>
+            </div>
+            <div class="header-item header-right">
+                <i class="glyphicon glyphicon-menu-hamburger"></i>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="btn-search">
+                <input type="text" class="form-control" placeholder="请输入楼盘名称"/>
+            </div>
+        </div>
+        <div class="filter-group mt_10" v-on:click="showFilterPanel=true">
+            <div class="filter" v-on:click="filterTabIdx=1"><span>{{filterParams.district || '区域'}}</span></div>
+            <div class="filter" v-on:click="filterTabIdx=2"><span>{{filterParams.huxin || '户型'}}</span></div>
+            <div class="filter" v-on:click="filterTabIdx=3"><span>{{filterParams.sort || '排序'}}</span></div>
+        </div>
+
+        <div class="listview" v-for="item in items">
+            <a class="media" href="detail.html">
+                <div class="media-left">
+                        <img class="media-object" v-bind:src="item.mainPic" alt="..."/>
+                </div>
+                <div class="media-body">
+                    <div class="media-heading f16">{{item.name}}</div>
+                    <div class="media-info f12">
+                        <span>{{mergeArray(item.layout, '居', ' / ')}}</span>
+                        <span><span class="red bold"><span class="f16">{{item.avgPrice}}</span> 元/平</span></span>
+                    </div>
+                    <div class="media-info f12">{{item.districtName}} - {{item.address}}</div>
+                </div>
+            </a>
+        </div>
+        <div class="filter-backdrop" v-if="showFilterPanel" v-on:click.self="showFilterPanel=false">
+            <div class="filter-group">
+                <div class="filter" v-bind:class="{ active: filterTabIdx==1 }" v-on:click="filterTabIdx=1"><span>{{filterParams.district || '区域'}}</span></div>
+                <div class="filter" v-bind:class="{ active: filterTabIdx==2 }" v-on:click="filterTabIdx=2"><span>{{filterParams.huxin || '户型'}}</span></div>
+                <div class="filter" v-bind:class="{ active: filterTabIdx==3 }" v-on:click="filterTabIdx=3"><span>{{filterParams.sort || '排序'}}</span></div>
+            </div>
+            <div class="filter-item-group" v-if="filterTabIdx==1">
+                <div class="filter-item"
+                        v-bind:class="{ active: filterParams.district==district.value &amp;&amp; district.value}"
+                        v-on:click="onChooseDistrict(district.value)"
+                        v-for="district in districts">{{district.text}}</div>
+            </div>
+            <div class="filter-item-group" v-if="filterTabIdx==2">
+                <div class="filter-item"
+                        v-bind:class="{ active: filterParams.huxin==h.value &amp;&amp; h.value}"
+                        v-on:click="onChooseHuxin(h.value)"
+                        v-for="h in huxins">{{h.text}}</div>
+            </div>
+            <div class="filter-item-group" v-if="filterTabIdx==3">
+                    <div class="filter-item"
+                        v-bind:class="{ active: filterParams.sort==s.value &amp;&amp; s.value}"
+                        v-on:click="onChooseSort(s.value)"
+                        v-for="s in sorts">{{s.text}}</div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+<script type="text/javascript" src="/static/js/zepto.min.js"></script>
+<script type="text/javascript" src="/static/js/vue.min.js"></script>
+<script type="text/javascript" src="/static/js/list.js"></script>
+<script type="text/javascript" src="http://map.qq.com/api/js?v=2.exp&amp;key=VKJBZ-D3JRW-DQ7RN-OA66V-5RYQ5-23B7P"></script>
+</html>

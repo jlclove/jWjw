@@ -120,6 +120,7 @@ public class LoupanController extends BaseController {
    * 
    * @see LoupanService#findList(int, String, String, String, String, String)
    */
+  @RequestMapping(value = "/api/loupan", method = RequestMethod.GET)
   public List<LoupanListView> findList(@RequestParam(value = "pageNo", required = true, defaultValue = "1") int pageNo,
       @RequestParam(value = "name", required = false) String name, @RequestParam(value = "cityName", required = false) String cityName,
       @RequestParam(value = "districtName", required = false) String districtName,

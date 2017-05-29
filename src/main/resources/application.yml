@@ -22,12 +22,12 @@ server:
     
 
 spring.thymeleaf: 
-    cache: true # Enable template caching.
+    cache: false # Enable template caching.
     check-template-location: true
     content-type: text/html # Content-Type value.
     enabled: true # Enable MVC Thymeleaf view resolution.
     encoding: UTF-8 # Template encoding.
-    mode: HTML5 
+    mode: HTML5
     prefix: "classpath:/templates/" # Prefix that gets prepended to view names when building a URL.
     suffix: ".html" # Suffix that gets appended to view names when building a URL.
     

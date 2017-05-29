@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/vendor/photoswipe/photoswipe.css">
+    <link rel="stylesheet" href="/static/vendor/photoswipe/default-skin/default-skin.css">
+    <link rel="stylesheet" href="/static/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="/static/css/app.css">
+    <link rel="stylesheet" href="/static/css/detail.css">
+</head>
+<body>
+    <div id="detail-page" class="detail-page">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" v-for="img in imageList" v-on:click="onClick"><img v-bind:src="img.src"></div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-back" v-on:click="back()"></div>
+            <div class="swiper-footer">
+                <span>效果图
+                </span><span>实景图
+                </span><span>户型图
+                </span><span>交通配套</span>
+            </div>
+        </div>
+        <div class="box">
+            <div class="container">
+                <h4 class="mt_30">中福浦江汇</h4>
+                <div>均价: <span class="f18 red">38000</span> 元/平</div>
+            </div>
+            <hr>
+            <div class="container">
+                <p><span class="text-label">主力户型:</span>1居, 2居, 3居</p>
+                <p><span class="text-label">项目地址:</span>海潮路133弄（近中山南路）</p>
+                <div class="row">
+                    <div class="col-xs-6"><p><span class="text-label">物业类型:</span>普通住宅</p></div>
+                    <div class="col-xs-6"><p><span class="text-label">建筑类型:</span>板楼</p></div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6"><p><span class="text-label">装修:</span>毛坯</p></div>
+                    <div class="col-xs-6"><p><span class="text-label">产权年限:</span>40年</p></div>
+                </div>
+                <div><span class="text-label">开发商:</span>上海瀛联置业有限公司</div>
+            </div>
+            <hr>
+            <div class="container">
+
+            </div>
+        </div>
+        <div class="box"></div>
+        <a href="tel://021-61621234" class="btn-contact">联系案场 021-61621234</a>
+    </div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+        <!-- Background of PhotoSwipe.
+             It's a separate element as animating opacity is faster than rgba(). -->
+        <div class="pswp__bg"></div>
+
+        <!-- Slides wrapper with overflow:hidden. -->
+        <div class="pswp__scroll-wrap">
+
+            <!-- Container that holds slides.
+                PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                Don't modify these 3 pswp__item elements, data is added later on. -->
+            <div class="pswp__container">
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+            </div>
+
+            <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+            <div class="pswp__ui pswp__ui--hidden">
+
+                <div class="pswp__top-bar">
+
+                    <!--  Controls are self-explanatory. Order can be changed. -->
+
+                    <div class="pswp__counter"></div>
+
+                    <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                    <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                    <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                    <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                    <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                    <!-- element will get class pswp__preloader--active when preloader is running -->
+                    <div class="pswp__preloader">
+                        <div class="pswp__preloader__icn">
+                            <div class="pswp__preloader__cut">
+                                <div class="pswp__preloader__donut"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                    <div class="pswp__share-tooltip"></div>
+                </div>
+
+                <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+                </button>
+
+                <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+                </button>
+
+                <div class="pswp__caption">
+                    <div class="pswp__caption__center"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</body>
+<script type="text/javascript" src="/static/js/vue.min.js"></script>
+<script type="text/javascript" src="/static/vendor/photoswipe/photoswipe.min.js"></script>
+<script type="text/javascript" src="/static/vendor/photoswipe/photoswipe-ui-default.min.js"></script>
+<script type="text/javascript" src="/static/js/swiper-3.4.2.min.js"></script>
+<script type="text/javascript" src="/static/js/detail.js"></script>
+</html>
