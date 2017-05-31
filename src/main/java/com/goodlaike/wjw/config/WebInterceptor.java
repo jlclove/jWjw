@@ -29,8 +29,8 @@ public class WebInterceptor extends WebMvcConfigurerAdapter {
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
     registry.addInterceptor(loginedInterceptor())
-            .addPathPatterns("/", "/loupan/**", "/api/loupan/**")
-            .excludePathPatterns("/login", "/api/loupan", "/loupan", "/loupan/", "/static/**", "/imgs/**");
+            .addPathPatterns("/", "/loupan/**", "/page/loupan/**")
+            .excludePathPatterns("/page/login", "/page/loupan", "/page/loupan/", "/static/**", "/imgs/**");
   }
 
   @Bean
@@ -47,7 +47,7 @@ public class WebInterceptor extends WebMvcConfigurerAdapter {
         return true;
       } else {
 //        throw new UnloginedException();
-        response.sendRedirect("/login");
+        response.sendRedirect("/page/login");
         return false;
       }
     }

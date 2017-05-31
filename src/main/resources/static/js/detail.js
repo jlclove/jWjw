@@ -4,23 +4,33 @@
 var app = new Vue({
     el: '#detail-page',
     data: {
-        imageList: [
-            {
-                src: 'img/f1.jpg',
-                w: 600,
-                h: 400
-            },
-            {
-                src: 'img/f2.jpg',
-                w: 600,
-                h: 400
-            },
-            {
-                src: 'img/f2.jpg',
-                w: 600,
-                h: 400
-            }
-        ]
+        loupan: {},
+        imageList: []
+    },
+    created: function () {
+        var params = window.location.pathname.match(/\/page\/loupan\/(\d+)/);
+        if(params) {
+            var that = this;
+            $.get('/loupan/' + params[1], function(data){
+                that.loupan = data.loupan;
+                var imgs = [];
+                for(var k in data.picMap){
+                    for(var j = 0; j < data.picMap[k].length; j++){
+                        data.picMap[k][j].src = data.picMap[k][j].picUrl;
+                        data.picMap[k][j].w = 600;
+                        data.picMap[k][j].h = 400;
+                    }
+                    imgs.push(data.picMap[k]);
+                }
+                that.imageList = imgs[0];
+                setTimeout(function(){
+                    initSwiper();
+                }, 60);
+            })
+        }
+
+
+
     },
     computed: {},
     methods: {
@@ -32,7 +42,7 @@ var app = new Vue({
         }
     },
     mounted: function(){
-        initSwiper();
+        // initSwiper();
     }
 })
 

@@ -3,6 +3,10 @@ body {
     background-color: #f4f4f4;
 }
 
+[v-cloak] {
+    display: none;
+}
+
 a:focus,a:active,a:hover {
     text-decoration: none;
 }

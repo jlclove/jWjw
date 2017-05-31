@@ -1,0 +1,9 @@
+body {
+    background: #fff;
+}
+.login-bg {
+    padding-top: 130px;
+    background: url(/static/img/logo.png);
+    background-position: center 30px;
+    background-repeat: no-repeat;
+}

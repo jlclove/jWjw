@@ -31,7 +31,7 @@
         </div>
 
         <div class="listview" v-for="item in items">
-            <a class="media" href="detail.html">
+            <a class="media" v-bind:href="'/page/loupan/' + item.id">
                 <div class="media-left">
                         <img class="media-object" v-bind:src="item.mainPic" alt="..."/>
                 </div>
