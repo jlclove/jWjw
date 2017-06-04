@@ -11,6 +11,8 @@ public class UserView {
    * 用户名
    */
   private String userName;
+  
+  private boolean admin;
 
 
 
@@ -30,8 +32,16 @@ public class UserView {
     this.userName = userName;
   }
 
+  public boolean isAdmin() {
+    return this.admin;
+  }
+
+  public void setAdmin(boolean admin) {
+    this.admin = admin;
+  }
+
   @Override
   public String toString() {
-    return "UserView [id=" + id + ", userName=" + userName + "]";
+    return "UserView [id=" + id + ", userName=" + userName + ", admin=" + admin + "]";
   }
 }

@@ -41,7 +41,7 @@ public class UserController extends BaseController {
   /**
    * 获得当前登录用户
    */
-  @RequestMapping(value = "/admin/user/logined", method = RequestMethod.GET)
+  @RequestMapping(value = "/user/logined", method = RequestMethod.GET)
   public UserView logined(HttpServletRequest request) {
     return super.pollLogined(request);
   }

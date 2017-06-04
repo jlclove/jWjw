@@ -32,6 +32,11 @@ public class User implements Serializable {
    * 用户密码
    */
   private String password;
+  
+  /**
+   * 是否管理员
+   */
+  private boolean admin;
 
   /**
    * 状态
@@ -90,6 +95,14 @@ public class User implements Serializable {
     this.password = password;
   }
 
+  public boolean isAdmin() {
+    return this.admin;
+  }
+
+  public void setAdmin(boolean admin) {
+    this.admin = admin;
+  }
+
   public byte getStatus() {
     return this.status;
   }
@@ -132,7 +145,7 @@ public class User implements Serializable {
 
   @Override
   public String toString() {
-    return "User [id=" + id + ", userName=" + userName + ", salt=" + salt + ", password=" + password + ", status=" + status + ", creator="
-        + creator + ", createTime=" + createTime + ", updator=" + updator + ", updateTime=" + updateTime + "]";
+    return "User [id=" + id + ", userName=" + userName + ", salt=" + salt + ", password=" + password + ", admin=" + admin + ", status="
+        + status + ", creator=" + creator + ", createTime=" + createTime + ", updator=" + updator + ", updateTime=" + updateTime + "]";
   }
 }

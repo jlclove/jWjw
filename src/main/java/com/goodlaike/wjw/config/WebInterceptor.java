@@ -14,6 +14,8 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import com.goodlaike.wjw.view.UserView;
+
 @Configuration
 public class WebInterceptor extends WebMvcConfigurerAdapter {
 
@@ -28,12 +30,21 @@ public class WebInterceptor extends WebMvcConfigurerAdapter {
   public void addInterceptors(InterceptorRegistry registry) {
     registry.addInterceptor(loginedInterceptor()).addPathPatterns("/page/loupan/**", "/api/loupan/**").excludePathPatterns("/",
         "/api/loupan", "/static/**", "/imgs/**");
+    
+    registry.addInterceptor(adminLoginedInterceptor()).addPathPatterns("/admin/**");
   }
 
-  @Bean
+  @Bean("loginedInterceptor")
   public LoginedInterceptor loginedInterceptor() {
     return new LoginedInterceptor();
   }
+
+  @Bean("adminLoginedInterceptor")
+  public AdminLoginedInterceptor adminLoginedInterceptor() {
+    return new AdminLoginedInterceptor();
+  }
+
+
 
   static class LoginedInterceptor implements HandlerInterceptor {
 
@@ -41,6 +52,29 @@ public class WebInterceptor extends WebMvcConfigurerAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
       Object object = request.getSession(true).getAttribute(IConstants.SESSION_USER);
       if (object != null) {
+        return true;
+      } else {
+        // throw new UnloginedException();
+        response.sendRedirect("/page/login");
+        return false;
+      }
+    }
+
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)
+        throws Exception {}
+
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {}
+
+  }
+
+  static class AdminLoginedInterceptor implements HandlerInterceptor {
+
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+      Object object = request.getSession(true).getAttribute(IConstants.SESSION_USER);
+      if (object != null && ((UserView) object).isAdmin()) {
         return true;
       } else {
         // throw new UnloginedException();

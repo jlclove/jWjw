@@ -9,12 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/")
-public class HomeController {
+public class HomeController extends BaseController {
 
   @RequestMapping("/page/login")
   protected String login(HttpServletRequest request, Model model) {
-    model.addAttribute("referer", request.getHeader("referer"));
-    return "login";
+    if (super.pollLogined(request) != null) {
+      return "redirect:/";
+    } else {
+      model.addAttribute("referer", request.getHeader("referer"));
+      return "login";
+    }
   }
 
   @RequestMapping({"/"})
