@@ -31,3 +31,7 @@ spring.thymeleaf:
     prefix: "classpath:/templates/" # Prefix that gets prepended to view names when building a URL.
     suffix: ".html" # Suffix that gets appended to view names when building a URL.
     
+proxy: 
+    key: NKKBZ-FLIKI-6ZBGN-5DJVM-5FWST-FNBF3
+    districtUrl: http://apis.map.qq.com/ws/district/v1/getchildren?id={id}&key=${proxy.key}
+    
