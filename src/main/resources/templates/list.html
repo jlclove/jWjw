@@ -26,8 +26,8 @@
         </div>
         <div class="filter-group mt_10" v-on:click="showFilterPanel=true">
             <div class="filter" v-on:click="filterTabIdx=1"><span>{{filterParams.district || '区域'}}</span></div>
-            <div class="filter" v-on:click="filterTabIdx=2"><span>{{filterParams.huxin || '户型'}}</span></div>
-            <div class="filter" v-on:click="filterTabIdx=3"><span>{{filterParams.sort || '排序'}}</span></div>
+            <div class="filter" v-on:click="filterTabIdx=2"><span>{{filterParams.layouts || '户型'}}</span></div>
+            <div class="filter" v-on:click="filterTabIdx=3"><span>{{filterParams.order || '排序'}}</span></div>
         </div>
 
         <div class="listview" v-for="item in items">
@@ -48,8 +48,8 @@
         <div class="filter-backdrop" v-if="showFilterPanel" v-on:click.self="showFilterPanel=false">
             <div class="filter-group">
                 <div class="filter" v-bind:class="{ active: filterTabIdx==1 }" v-on:click="filterTabIdx=1"><span>{{filterParams.district || '区域'}}</span></div>
-                <div class="filter" v-bind:class="{ active: filterTabIdx==2 }" v-on:click="filterTabIdx=2"><span>{{filterParams.huxin || '户型'}}</span></div>
-                <div class="filter" v-bind:class="{ active: filterTabIdx==3 }" v-on:click="filterTabIdx=3"><span>{{filterParams.sort || '排序'}}</span></div>
+                <div class="filter" v-bind:class="{ active: filterTabIdx==2 }" v-on:click="filterTabIdx=2"><span>{{filterParams.layouts || '户型'}}</span></div>
+                <div class="filter" v-bind:class="{ active: filterTabIdx==3 }" v-on:click="filterTabIdx=3"><span>{{filterParams.order || '排序'}}</span></div>
             </div>
             <div class="filter-item-group" v-if="filterTabIdx==1">
                 <div class="filter-item"
@@ -59,15 +59,15 @@
             </div>
             <div class="filter-item-group" v-if="filterTabIdx==2">
                 <div class="filter-item"
-                        v-bind:class="{ active: filterParams.huxin==h.value &amp;&amp; h.value}"
+                        v-bind:class="{ active: filterParams.layouts==h.value &amp;&amp; h.value}"
                         v-on:click="onChooseHuxin(h.value)"
-                        v-for="h in huxins">{{h.text}}</div>
+                        v-for="h in layoutType">{{h.name}}</div>
             </div>
             <div class="filter-item-group" v-if="filterTabIdx==3">
                     <div class="filter-item"
-                        v-bind:class="{ active: filterParams.sort==s.value &amp;&amp; s.value}"
+                        v-bind:class="{ active: filterParams.order==s.value &amp;&amp; s.value}"
                         v-on:click="onChooseSort(s.value)"
-                        v-for="s in sorts">{{s.text}}</div>
+                        v-for="s in orderType">{{s.name}}</div>
             </div>
         </div>
     </div>
