@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.goodlaike.wjw.service.loupan.LoupanService;
+import com.goodlaike.wjw.view.LoupanDetailView;
 import com.goodlaike.wjw.view.LoupanListView;
 
 @RestController
@@ -113,5 +114,15 @@ public class LoupanController extends BaseController {
       @RequestParam(value = "districtName", required = false) String districtName,
       @RequestParam(value = "layouts", required = false) String layouts, @RequestParam(value = "order", required = false) String order) {
     return this.loupanService.findList(pageNo, name, cityName, districtName, layouts, order);
+  }
+
+  /**
+   * 详情查询
+   * 
+   * @see LoupanService#findDetailById(long)
+   */
+  @RequestMapping(value = "/api/loupan/{id}", method = RequestMethod.GET)
+  public LoupanDetailView findDetailById(@PathVariable(value = "id") long id) {
+    return this.loupanService.findDetailById(id);
   }
 }

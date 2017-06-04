@@ -5,15 +5,27 @@ var app = new Vue({
     el: '#detail-page',
     data: {
         loupan: {},
+        layoutTypeList: [],
+        statFunctionList: [],
+        structFunctionList: [],
+        flagList: [],
+        ageLimitList: [],
+        decoItemList: [],
         imageList: []
     },
     created: function () {
         var params = window.location.pathname.match(/\/page\/loupan\/(\d+)/);
         // 图片什么的已经都在了
-        /*if(params) {
+        if(params) {
             var that = this;
-            $.get('/loupan/' + params[1], function(data){
+            $.get('/api/loupan/' + params[1], function(data){
                 that.loupan = data.loupan;
+                that.layoutTypeList = data.layoutTypeList;
+                that.statFunctionList = data.statFunctionList;
+                that.structFunctionList = data.structFunctionList;
+                that.flagList = data.flagList;
+                that.ageLimitList = data.ageLimitList;
+                that.decoItemList = data.decoItemList;
                 var imgs = [];
                 for(var k in data.picMap){
                     for(var j = 0; j < data.picMap[k].length; j++){
@@ -28,10 +40,7 @@ var app = new Vue({
                     initSwiper();
                 }, 60);
             })
-        }*/
-
-
-
+        }
     },
     computed: {},
     methods: {

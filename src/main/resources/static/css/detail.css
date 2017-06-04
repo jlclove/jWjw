@@ -7,6 +7,19 @@
 .detail-page {
     padding-bottom: 46px;
 }
+.district{
+	margin-left:8px;
+	font-size:12px;
+	color:#999;
+}
+.flags span{
+	display:inline-block;
+	border:1px solid #cde;
+	border-radius: 3px;
+	color:#f33;
+	padding:2px 8px;
+}
+
 .swiper-container {
     /*width: 600px;*/
     height: 230px;

@@ -1,5 +1,9 @@
 package com.goodlaike.wjw.dict;
 
+import java.util.Arrays;
+
+import com.goodlaike.wjw.support.FlagSupport;
+
 /**
  * 标签
  * 
@@ -31,5 +35,9 @@ public enum Flag implements IFlag {
   private Flag(String displayName, int placeIndex) {
     this.placeIndex = placeIndex;
     this.displayName = displayName;
+  }
+  
+  public static void main(String[] args) {
+    System.out.println(FlagSupport.enFlag(Arrays.asList(Flag.热推)));
   }
 }

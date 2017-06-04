@@ -26,8 +26,8 @@ public class WebInterceptor extends WebMvcConfigurerAdapter {
 
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
-    registry.addInterceptor(loginedInterceptor()).addPathPatterns("/", "/page/loupan/**").excludePathPatterns("/page/login", "/page/loupan",
-        "/static/**", "/imgs/**");
+    registry.addInterceptor(loginedInterceptor()).addPathPatterns("/page/loupan/**", "/api/loupan/**").excludePathPatterns("/",
+        "/api/loupan", "/static/**", "/imgs/**");
   }
 
   @Bean
