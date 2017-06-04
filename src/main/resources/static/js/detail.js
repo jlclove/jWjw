@@ -9,7 +9,8 @@ var app = new Vue({
     },
     created: function () {
         var params = window.location.pathname.match(/\/page\/loupan\/(\d+)/);
-        if(params) {
+        // 图片什么的已经都在了
+        /*if(params) {
             var that = this;
             $.get('/loupan/' + params[1], function(data){
                 that.loupan = data.loupan;
@@ -27,7 +28,7 @@ var app = new Vue({
                     initSwiper();
                 }, 60);
             })
-        }
+        }*/
 
 
 

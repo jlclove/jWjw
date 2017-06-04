@@ -28,13 +28,13 @@
         </div>
         <div class="box" v-cloak="">
             <div class="container">
-                <h4 class="mt_30">{{loupan.name}}</h4>
-                <div>均价: <span class="f18 red">{{loupan.avgPrice}}</span> 元/平</div>
+                <h4 class="mt_30">{{loupanView.loupan.name}}</h4>
+                <div>均价: <span class="f18 red">{{loupanView.loupan.avgPrice}}</span> 元/平</div>
             </div>
             <hr/>
             <div class="container">
                 <p><span class="text-label">主力户型:</span>1居, 2居, 3居</p>
-                <p><span class="text-label">项目地址:</span>{{loupan.address}}</p>
+                <p><span class="text-label">项目地址:</span>{{loupanView.loupan.address}}</p>
                 <div class="row">
                     <div class="col-xs-6"><p><span class="text-label">物业类型:</span>普通住宅</p></div>
                     <div class="col-xs-6"><p><span class="text-label">建筑类型:</span>板楼</p></div>
@@ -51,7 +51,7 @@
             </div>
         </div>
         <div class="box" v-cloak=""></div>
-        <a v-cloak="" v-bind:href="'tel://' + loupan.linkerPhone" class="btn-contact">联系案场 {{loupan.linkerPhone}}</a>
+        <a v-cloak="" v-bind:href="'tel://' + loupanView.loupan.linkerPhone" class="btn-contact">联系案场 {{loupanView.loupan.linkerPhone}}</a>
     </div>
     <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
 

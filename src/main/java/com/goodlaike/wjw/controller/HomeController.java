@@ -8,30 +8,27 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/page")
-public class HomeController  {
+@RequestMapping("/")
+public class HomeController {
 
   @Autowired
   private LoupanService loupanService;
 
-  @RequestMapping("/login")
+
+  @RequestMapping("/page/login")
   protected String login(Model model) {
     return "login";
   }
 
-  @RequestMapping("/loupan")
+  @RequestMapping({"/", "/page/loupan"})
   protected String list(Model model) {
     return "list";
   }
 
-  @RequestMapping("/loupan/{id}")
+  @RequestMapping("/page/loupan/{id}")
   protected String detail(@PathVariable(value = "id") long id, Model model) {
-    model.addAttribute("loupan", this.loupanService.findDetailById(id));
+    model.addAttribute("loupanView", this.loupanService.findDetailById(id));
     return "detail";
   }
 
-  @RequestMapping("/5000")
-  protected String home2() {
-    return "hello";
-  }
 }

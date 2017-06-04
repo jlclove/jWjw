@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.goodlaike.wjw.service.loupan.LoupanService;
-import com.goodlaike.wjw.view.LoupanDetailView;
 import com.goodlaike.wjw.view.LoupanListView;
 
 @RestController
@@ -20,18 +19,6 @@ public class LoupanController extends BaseController {
 
   @Autowired
   private LoupanService loupanService;
-
-
-
-  /**
-   * 根据ID 获得楼盘
-   *
-   * @see LoupanService#findDetailById(long)
-   */
-  @RequestMapping(value = "/loupan/{id}", method = RequestMethod.GET)
-  public LoupanDetailView findById(@PathVariable(value = "id") long id) {
-    return this.loupanService.findDetailById(id);
-  }
 
   /**
    * 新增楼盘并返回楼盘ID

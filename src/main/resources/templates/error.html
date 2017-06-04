@@ -1,11 +1,18 @@
-<html lang="en">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8"/>
   <title>goodbye daddy!</title>
 </head>
 
 <body>
-  <h1>goodbye daddy!</h1>
+  <h1>you got an exception。 goodbye daddy!</h1>
+  <div style="font-size:14px;">
+  <p>timestamp: <span style="color:red" th:text="${timestamp}"></span></p>
+  <p>status: <span style="color:red" th:text="${status}"></span></p>
+  <p>error: <span style="color:red" th:text="${error}"></span></p>
+  <p>message: <span style="color:red" th:text="${message}"></span></p>
+  <p>path: <span style="color:red" th:text="${path}"></span></p>
+  </div>
 </body>
-
 </html>

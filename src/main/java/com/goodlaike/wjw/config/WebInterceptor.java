@@ -14,8 +14,6 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import com.goodlaike.wjw.exceptions.UnloginedException;
-
 @Configuration
 public class WebInterceptor extends WebMvcConfigurerAdapter {
 
@@ -28,9 +26,8 @@ public class WebInterceptor extends WebMvcConfigurerAdapter {
 
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
-    registry.addInterceptor(loginedInterceptor())
-            .addPathPatterns("/", "/loupan/**", "/page/loupan/**")
-            .excludePathPatterns("/page/login", "/page/loupan", "/page/loupan/", "/static/**", "/imgs/**");
+    registry.addInterceptor(loginedInterceptor()).addPathPatterns("/", "/page/loupan/**").excludePathPatterns("/page/login", "/page/loupan",
+        "/static/**", "/imgs/**");
   }
 
   @Bean
@@ -46,7 +43,7 @@ public class WebInterceptor extends WebMvcConfigurerAdapter {
       if (object != null) {
         return true;
       } else {
-//        throw new UnloginedException();
+        // throw new UnloginedException();
         response.sendRedirect("/page/login");
         return false;
       }

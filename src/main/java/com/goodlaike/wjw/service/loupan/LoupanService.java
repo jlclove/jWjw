@@ -46,6 +46,12 @@ public class LoupanService {
       LoupanDetailView view = new LoupanDetailView();
       view.setLoupan(loupan);
       view.setPicMap(this.loupanPictureService.findByLoupanId(id).stream().collect(Collectors.groupingBy(LoupanPicture::getType)));
+      view.setAgeLimitList(FlagSupport.deFlag(loupan.getAgeLimits(), AgeLimit.class));
+      view.setDecoItemList(FlagSupport.deFlag(loupan.getDecoItems(), DecoItem.class));
+      view.setFlagList(FlagSupport.deFlag(loupan.getFlag(), Flag.class));
+      view.setLayoutTypeList(FlagSupport.deFlag(loupan.getLayouts(), LayoutType.class));
+      view.setStatFunctionList(FlagSupport.deFlag(loupan.getStatFunctions(), StatFunction.class));
+      view.setStructFunctionList(FlagSupport.deFlag(loupan.getStructFunctions(), StructFunction.class));
       return view;
     }
   }
