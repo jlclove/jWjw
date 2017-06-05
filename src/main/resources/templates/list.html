@@ -12,7 +12,7 @@
         <div class="header">
             <div class="header-item header-left"><i class="glyphicon glyphicon-home"></i></div>
             <div class="header-item header-center">
-                <a href="">新房 上海 <i class="ic-down"></i></a>
+                <a href="javascript:;" v-on:click="showCityPanel=true">新房 {{filterParams.cityName}} <i class="ic-down"></i></a>
             </div>
             <div class="header-item header-right">
                 <i class="glyphicon glyphicon-menu-hamburger"></i>
@@ -21,11 +21,11 @@
 
         <div class="container">
             <div class="btn-search">
-                <input type="text" class="form-control" placeholder="请输入楼盘名称"/>
+                <input type="text" class="form-control" placeholder="请输入楼盘名称" v-model="filterParams.name"/>
             </div>
         </div>
         <div class="filter-group mt_10" v-on:click="showFilterPanel=true">
-            <div class="filter" v-on:click="filterTabIdx=1"><span>{{filterParams.district || '区域'}}</span></div>
+            <div class="filter" v-on:click="filterTabIdx=1"><span>{{filterParams.districtName || '区域'}}</span></div>
             <div class="filter" v-on:click="filterTabIdx=2"><span>{{filterParams.layouts || '户型'}}</span></div>
             <div class="filter" v-on:click="filterTabIdx=3"><span>{{filterParams.order || '排序'}}</span></div>
         </div>
@@ -45,6 +45,19 @@
                 </div>
             </a>
         </div>
+
+        <div class="filter-backdrop" v-if="showCityPanel" v-on:click.self="showCityPanel=false">
+            <div class="filter-group">
+                <div class="filter">当前城市: {{filterParams.cityName}}</div>
+            </div>
+            <div class="filter-item-group">
+                <div class="filter-item"
+                     v-bind:class="{ active: filterParams.cityName==p.text}"
+                     v-on:click="onChooseCity(p)"
+                     v-for="p in provinces">{{p.text}}</div>
+            </div>
+        </div>
+
         <div class="filter-backdrop" v-if="showFilterPanel" v-on:click.self="showFilterPanel=false">
             <div class="filter-group">
                 <div class="filter" v-bind:class="{ active: filterTabIdx==1 }" v-on:click="filterTabIdx=1"><span>{{filterParams.district || '区域'}}</span></div>
@@ -53,9 +66,9 @@
             </div>
             <div class="filter-item-group" v-if="filterTabIdx==1">
                 <div class="filter-item"
-                        v-bind:class="{ active: filterParams.district==district.value &amp;&amp; district.value}"
-                        v-on:click="onChooseDistrict(district.value)"
-                        v-for="district in districts">{{district.text}}</div>
+                        v-bind:class="{ active: filterParams.districtName==district.name &amp;&amp; district.name}"
+                        v-on:click="onChooseDistrict(district.name)"
+                        v-for="district in districts">{{district.name}}</div>
             </div>
             <div class="filter-item-group" v-if="filterTabIdx==2">
                 <div class="filter-item"

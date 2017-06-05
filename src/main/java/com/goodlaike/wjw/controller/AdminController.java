@@ -12,6 +12,11 @@ public class AdminController {
 
   @RequestMapping("/home")
   protected String adminHome(HttpServletRequest request, Model model) {
-    return "admin";
+    return "admin/home";
+  }
+
+  @RequestMapping("/login")
+  protected String adminLogin(HttpServletRequest request, Model model) {
+    return "admin/login";
   }
 }

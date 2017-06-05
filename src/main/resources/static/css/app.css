@@ -45,6 +45,16 @@ a:focus,a:active,a:hover {
 .header > .header-item {
     padding: 0 12px;
 }
+.city-container {
+    position: absolute;
+    top: 48px;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    padding: 12px;
+    z-index: 5;
+}
+
 .btn-search {
     position: relative;
 }
