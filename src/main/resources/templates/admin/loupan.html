@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="admin/fragment/common :: header"></head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper" id="loupan-list-page">
+        <header th:replace="admin/fragment/layout :: main-header"></header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside th:replace="admin/fragment/layout :: main-sidebar"></aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>
+                    楼盘管理
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="/admin/home"><i class="fa fa-dashboard"></i> 首页</a></li>
+                    <li class="active">楼盘管理</li>
+                </ol>
+            </section>
+            <!-- Main content -->
+            <section class="content">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">楼盘列表</h3>
+
+                        <div class="box-tools">
+                            <button class="btn btn-sm btn-primary btn-flat"><i class="fa fa-plus"></i> 新增楼盘</button>
+                            <!--<div class="input-group input-group-sm" style="width: 150px;">-->
+                                <!--<input type="text" name="table_search" class="form-control pull-right" placeholder="Search"/>-->
+<!---->
+                                <!--<div class="input-group-btn">-->
+                                    <!--<button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding" v-cloak="">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th>楼盘名</th>
+                                    <th>区域</th>
+                                    <th>户型</th>
+                                    <th>均价</th>
+                                    <th>地址</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="loupan in loupanList">
+                                    <td>
+                                        <a v-bind:href="'/admin/loupans/' + loupan.id">{{loupan.name}}</a>
+                                    </td>
+                                    <td>{{loupan.districtName}}</td>
+                                    <td>{{loupan.layouts}}</td>
+                                    <td>{{loupan.avgPrice}}</td>
+                                    <td>{{loupan.address}}</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-default btn-flat">
+                                            <i class="fa fa-edit"></i> 编辑</button>
+                                        <button class="btn btn-sm btn-danger btn-flat">
+                                            <i class="fa fa-trash"></i> 删除</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer clearfix">
+                        <ul class="pagination pagination-sm no-margin pull-right">
+                            <li><a href="#">«</a></li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">»</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <aside th:replace="admin/fragment/layout :: main-footer"></aside>
+        <div th:replace="admin/fragment/layout :: control-sidebar"></div>
+    </div>
+
+    <div th:replace="admin/fragment/common :: footer('/static/admin/js/loupan.js')"></div>
+</body>
+</html>

@@ -95,10 +95,10 @@
             url: '/user/login',
             data: {userName: $('#userName').val(), password: $('#password').val()},
             success: function(){
-                if($('input[name=referer]').val()!=''){
+                if($('input[name=referer]').val()){
                     window.location.href = $('input[name=referer]').val();
                 }else{
-                    window.location.href = '/';
+                    window.location.href = '/admin/home';
                 }
             },
             error: function(){
