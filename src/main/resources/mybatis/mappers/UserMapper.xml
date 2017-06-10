@@ -67,4 +67,25 @@
 			and id != #{id}
 		</if>
 	</select>
+	
+	
+	<select id="findList" parameterType="map" resultType="user">
+		select id,userName,admin,updator,updateTime
+		from user
+		where status = 0
+		<if test="userName != null">
+			and userName = #{userName}
+		</if>
+		order by updateTime desc
+		limit #{indexStart}, #{pageSize}
+	</select>
+	
+	<select id="findListCount" parameterType="map" resultType="int">
+		select count(1)
+		from user
+		where status = 0
+		<if test="userName != null">
+			and userName = #{userName}
+		</if>
+	</select>
 </mapper>

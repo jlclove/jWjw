@@ -15,6 +15,7 @@ import com.goodlaike.wjw.dict.StatFunction;
 import com.goodlaike.wjw.dict.StructFunction;
 import com.goodlaike.wjw.model.Loupan;
 import com.goodlaike.wjw.model.LoupanPicture;
+import com.goodlaike.wjw.model.Pagination;
 import com.goodlaike.wjw.support.FlagSupport;
 import com.goodlaike.wjw.utils.EnumUtil;
 import com.goodlaike.wjw.view.LoupanDetailView;
@@ -110,11 +111,15 @@ public class LoupanService {
   /**
    * 分页查询
    * 
-   * @see LoupanDao#findList(int, String, String, String, Integer, String)
+   * @see LoupanDao#findList(int,int String, String, String, Integer, String)
    */
-  public List<LoupanListView> findList(int pageNo, String name, String cityName, String districtName, String layouts, String order) {
+  public List<LoupanListView> findList(int pageNo, int pageSize, String name, String cityName, String districtName, String layouts,
+      String order) {
     if (pageNo <= 0) {
       pageNo = 1;
+    }
+    if (pageSize <= 0) {
+      pageSize = 20;
     }
     String orderStr = null;
     if (order != null) {
@@ -132,7 +137,38 @@ public class LoupanService {
           break;
       }
     }
-    return this.loupanDao.findList(pageNo, name, cityName, districtName,
+    return this.loupanDao.findList(pageNo, pageSize, name, cityName, districtName,
         FlagSupport.enFlag(EnumUtil.valuesOf(LayoutType.class, layouts, ",")), orderStr);
+  }
+
+  /**
+   * 分页查询总数
+   * 
+   * @see LoupanDao#findListCount( String, String, String, Integer)
+   */
+  public long findListCount(String name, String cityName, String districtName, String layouts) {
+    return this.loupanDao.findListCount(name, cityName, districtName,
+        FlagSupport.enFlag(EnumUtil.valuesOf(LayoutType.class, layouts, ",")));
+  }
+
+
+  /**
+   * 分页查询
+   * 
+   */
+  public Pagination findPagination(int pageNo, int pageSize, String name, String cityName, String districtName, String layouts,
+      String order) {
+    if (pageNo <= 0) {
+      pageNo = 1;
+    }
+    if (pageSize <= 0) {
+      pageSize = 20;
+    }
+    Pagination page = new Pagination();
+    page.setList(this.findList(pageNo, pageSize, name, cityName, districtName, layouts, order));
+    page.setTotalRecords(this.findListCount(name, cityName, districtName, layouts));
+    page.setPageNo(pageNo);
+    page.setPageSize(pageSize);
+    return page;
   }
 }

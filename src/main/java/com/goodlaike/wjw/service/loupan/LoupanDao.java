@@ -119,6 +119,7 @@ class LoupanDao extends DaoManagement {
    * 查询列表
    * 
    * @param pageNo 页数，从1开始
+   * @param pageSize 页尺寸
    * @param name 楼盘名，左 like
    * @param cityName 城市名
    * @param districtName 区域名
@@ -129,16 +130,38 @@ class LoupanDao extends DaoManagement {
    * @version v1
    * @since 2017年5月18日 下午10:53:36
    */
-  public List<LoupanListView> findList(int pageNo, String name, String cityName, String districtName, Integer layouts, String order) {
+  public List<LoupanListView> findList(int pageNo, int pageSize, String name, String cityName, String districtName, Integer layouts,
+      String order) {
     Map<String, Object> params = new HashMap<>();
-    params.put("indexStart", (pageNo - 1) * 20);
-    params.put("pageSize", 20);
+    params.put("indexStart", (pageNo - 1) * pageSize);
+    params.put("pageSize", pageSize);
     params.put("name", name);
     params.put("cityName", cityName);
     params.put("districtName", districtName);
     params.put("layouts", layouts);
     params.put("order", order);
     return super.sqlSessionCommon.selectList("LoupanMapper.findList", params);
+  }
+
+  /**
+   * 查询列表数据总数
+   * 
+   * @param name 楼盘名，左 like
+   * @param cityName 城市名
+   * @param districtName 区域名
+   * @param layouts 居室聚合值
+   * @return {@code long}
+   * @author Jail Hu
+   * @version v1
+   * @since 2017年5月18日 下午10:53:36
+   */
+  public long findListCount(String name, String cityName, String districtName, Integer layouts) {
+    Map<String, Object> params = new HashMap<>();
+    params.put("name", name);
+    params.put("cityName", cityName);
+    params.put("districtName", districtName);
+    params.put("layouts", layouts);
+    return super.sqlSessionCommon.selectOne("LoupanMapper.findListCount", params);
   }
 
 

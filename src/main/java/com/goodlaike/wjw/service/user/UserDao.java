@@ -1,6 +1,7 @@
 package com.goodlaike.wjw.service.user;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.context.annotation.Lazy;
@@ -130,5 +131,40 @@ class UserDao extends DaoManagement {
     map.put("userName", userName);
     map.put("id", id);
     return super.sqlSessionCommon.selectOne("UserMapper.findUserNameCnt", map);
+  }
+
+
+  /**
+   * 查询列表
+   * 
+   * @param pageNo 页码
+   * @param pageSize 页尺寸
+   * @param userName 用户名
+   * @return {@code List<User>}
+   * @author Jail Hu
+   * @version v1
+   * @since 2017年6月10日 下午8:52:37
+   */
+  public List<User> findList(int pageNo, int pageSize, String userName) {
+    Map<String, Object> params = new HashMap<>();
+    params.put("indexStart", (pageNo - 1) * pageSize);
+    params.put("pageSize", pageSize);
+    params.put("userName", userName);
+    return super.sqlSessionCommon.selectList("UserMapper.findList", params);
+  }
+
+  /**
+   * 查询列表数据总数
+   * 
+   * @param userName 用户名
+   * @return {@code int}
+   * @author Jail Hu
+   * @version v1
+   * @since 2017年6月10日 下午8:52:37
+   */
+  public int findListCount(String userName) {
+    Map<String, Object> params = new HashMap<>();
+    params.put("userName", userName);
+    return super.sqlSessionCommon.selectOne("UserMapper.findListCount", params);
   }
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.goodlaike.wjw.model.Pagination;
 import com.goodlaike.wjw.service.loupan.LoupanService;
 import com.goodlaike.wjw.view.LoupanDetailView;
 import com.goodlaike.wjw.view.LoupanListView;
@@ -110,10 +111,23 @@ public class LoupanController extends BaseController {
    */
   @RequestMapping(value = "/api/loupan", method = RequestMethod.GET)
   public List<LoupanListView> findList(@RequestParam(value = "pageNo", required = true, defaultValue = "1") int pageNo,
+      @RequestParam(value = "pageSize", required = true, defaultValue = "20") int pageSize,
       @RequestParam(value = "name", required = false) String name, @RequestParam(value = "cityName", required = false) String cityName,
       @RequestParam(value = "districtName", required = false) String districtName,
       @RequestParam(value = "layouts", required = false) String layouts, @RequestParam(value = "order", required = false) String order) {
-    return this.loupanService.findList(pageNo, name, cityName, districtName, layouts, order);
+    return this.loupanService.findList(pageNo, pageSize, name, cityName, districtName, layouts, order);
+  }
+
+  /**
+   * 分页查询
+   */
+  @RequestMapping(value = "/api/loupanPage", method = RequestMethod.GET)
+  public Pagination findPagination(@RequestParam(value = "pageNo", required = true, defaultValue = "1") int pageNo,
+      @RequestParam(value = "pageSize", required = true, defaultValue = "20") int pageSize,
+      @RequestParam(value = "name", required = false) String name, @RequestParam(value = "cityName", required = false) String cityName,
+      @RequestParam(value = "districtName", required = false) String districtName,
+      @RequestParam(value = "layouts", required = false) String layouts, @RequestParam(value = "order", required = false) String order) {
+    return this.loupanService.findPagination(pageNo, pageSize, name, cityName, districtName, layouts, order);
   }
 
   /**

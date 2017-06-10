@@ -140,4 +140,22 @@
 		l.flag desc
 		limit #{indexStart}, #{pageSize}
 	</select>
+	
+	<select id="findListCount" parameterType="map" resultType="long">
+		select count(1)
+		from loupan as l
+		where l.status = 0
+		<if test="name!=null">
+			and l.name like concat(#{name},'%')
+		</if>
+		<if test="cityName!=null">
+			and l.cityName = #{cityName}
+		</if>
+		<if test="districtName!=null">
+			and l.districtName = #{districtName}
+		</if>
+		<if test="layouts!=0">
+			and l.layouts&amp;${layouts}=${layouts}
+		</if>
+	</select>
 </mapper>

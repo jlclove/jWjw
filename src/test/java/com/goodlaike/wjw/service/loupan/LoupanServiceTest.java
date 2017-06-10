@@ -58,13 +58,18 @@ public class LoupanServiceTest extends BaseTest {
 
   @Test
   public void testFindList() {
-    System.out.println(this.loupanService.findList(1, null, null, null, null, null));
-    System.out.println(this.loupanService.findList(1, "测试", null, null, null, null));
-    System.out.println(this.loupanService.findList(1, null, "上海", null, null, null));
-    System.out.println(this.loupanService.findList(1, null, null, "什么区域", null, null));
-    System.out.println(this.loupanService.findList(1, null, null, null,
+    System.out.println(this.loupanService.findList(1, 20, null, null, null, null, null));
+    System.out.println(this.loupanService.findList(1, 20, "测试", null, null, null, null));
+    System.out.println(this.loupanService.findList(1, 20, null, "上海", null, null, null));
+    System.out.println(this.loupanService.findList(1, 20, null, null, "什么区域", null, null));
+    System.out.println(this.loupanService.findList(1, 20, null, null, null,
         Arrays.asList(LayoutType.一居, LayoutType.三居).stream().map((s) -> s.name()).collect(Collectors.joining(",")), null));
-    System.out.println(this.loupanService.findList(1, null, null, null, null, "最近更新"));
+    System.out.println(this.loupanService.findList(1, 20, null, null, null, null, "最近更新"));
   }
 
+  
+  @Test
+  public void testFindPagination() {
+    System.out.println(this.loupanService.findPagination(1, 1, null, null, null, null, null));
+  }
 }

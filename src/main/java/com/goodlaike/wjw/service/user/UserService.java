@@ -1,11 +1,15 @@
 package com.goodlaike.wjw.service.user;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import com.goodlaike.wjw.model.Pagination;
 import com.goodlaike.wjw.model.User;
 import com.goodlaike.wjw.utils.RandomUtil;
 import com.goodlaike.wjw.view.UserView;
@@ -132,5 +136,57 @@ public class UserService {
    */
   public boolean deleteUser(int id, int operator) {
     return this.userDao.delete(id, operator) == 1;
+  }
+
+
+
+  /**
+   * 查询列表
+   * 
+   * @see UserDao#findList(int, int, String)
+   */
+  private List<User> findList(int pageNo, int pageSize, String userName) {
+    if (pageNo <= 0) {
+      pageNo = 1;
+    }
+    return this.userDao.findList(pageNo, pageSize, userName);
+  }
+
+  /**
+   * 查询列表数据总数
+   * 
+   * @see UserDao#findListCount(String)
+   */
+  private int findListCount(String userName) {
+    return this.userDao.findListCount(userName);
+  }
+
+
+  /**
+   * 分页查询
+   * 
+   */
+  public Pagination findPagination(int pageNo, int pageSize, String userName) {
+    if (pageNo <= 0) {
+      pageNo = 1;
+    }
+    if (pageSize <= 0) {
+      pageSize = 20;
+    }
+    Pagination page = new Pagination();
+
+    List<User> userList = this.findList(pageNo, pageSize, userName);
+
+    List<UserView> userViewList = new ArrayList<>(userList.size());
+    userList.forEach((u) -> {
+      UserView view = new UserView();
+      BeanUtils.copyProperties(u, view);
+      userViewList.add(view);
+    });
+    page.setList(userViewList);
+    page.setTotalRecords(this.findListCount(userName));
+    page.setPageNo(pageNo);
+    page.setPageSize(pageSize);
+    return page;
   }
 }

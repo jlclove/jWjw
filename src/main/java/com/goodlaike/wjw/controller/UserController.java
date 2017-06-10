@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.goodlaike.wjw.model.Pagination;
 import com.goodlaike.wjw.service.user.UserService;
 import com.goodlaike.wjw.view.UserView;
 
@@ -74,5 +75,15 @@ public class UserController extends BaseController {
   @RequestMapping(value = "/admin/user/userNameExist", method = RequestMethod.POST)
   public boolean userNameExist(@RequestParam(value = "userName", required = true) String userName) {
     return this.userService.userNameExist(userName, null);
+  }
+
+  /**
+   * 分页查询
+   */
+  @RequestMapping(value = "/admin/user", method = RequestMethod.GET)
+  public Pagination findList(@RequestParam(value = "pageNo", required = true, defaultValue = "1") int pageNo,
+      @RequestParam(value = "pageSize", required = true, defaultValue = "20") int pageSize,
+      @RequestParam(value = "userName", required = false) String userName) {
+    return this.userService.findPagination(pageNo, pageSize, userName);
   }
 }
