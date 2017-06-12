@@ -26,7 +26,7 @@
                         <h3 class="box-title">楼盘列表</h3>
 
                         <div class="box-tools">
-                            <button class="btn btn-sm btn-primary btn-flat"><i class="fa fa-plus"></i> 新增楼盘</button>
+                            <a class="btn btn-sm btn-primary btn-flat" href="/admin/loupans/add"><i class="fa fa-plus"></i> 新增楼盘</a>
                             <!--<div class="input-group input-group-sm" style="width: 150px;">-->
                                 <!--<input type="text" name="table_search" class="form-control pull-right" placeholder="Search"/>-->
 <!---->
@@ -51,7 +51,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="loupan in loupanList">
+                                <tr v-for="loupan in pagination.list">
                                     <td>
                                         <a v-bind:href="'/admin/loupans/' + loupan.id">{{loupan.name}}</a>
                                     </td>
@@ -72,11 +72,17 @@
                     <!-- /.box-body -->
                     <div class="box-footer clearfix">
                         <ul class="pagination pagination-sm no-margin pull-right">
-                            <li><a href="#">«</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">»</a></li>
+                            <li>
+                                <a v-if="pagination.pageNo > 1" href="javascript:;" v-on:click="loadPrev()">«</a>
+                                <span v-if="1 >= pagination.pageNo">«</span>
+                            </li>
+                            <li v-for="n in pagination.totalPages" v-bind:class="{ active: pagination.pageNo == n }">
+                                <a href="javascript:;" v-on:click="loadData(n)">{{n}}</a>
+                            </li>
+                            <li>
+                                <a v-if="pagination.totalPages > pagination.pageNo" href="javascript:;" v-on:click="loadNext()">»</a>
+                                <span v-if="pagination.pageNo >= pagination.totalPages">»</span>
+                            </li>
                         </ul>
                     </div>
                 </div>

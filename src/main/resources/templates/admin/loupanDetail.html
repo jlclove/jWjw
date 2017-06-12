@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="admin/fragment/common :: header"></head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        <header th:replace="admin/fragment/layout :: main-header"></header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside th:replace="admin/fragment/layout :: main-sidebar"></aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>
+                    楼盘详情
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="/admin/home"><i class="fa fa-dashboard"></i> 首页</a></li>
+                    <li><a href="/admin/loupans">楼盘管理</a></li>
+                    <li class="active" th:text="${detail.loupan.name}"></li>
+                </ol>
+            </section>
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">基本信息</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body table-responsive no-padding" v-cloak="">
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">楼盘名</label>
+                                        <p class="form-control-static" th:text="${detail.loupan.name}"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">城市名</label>
+                                        <p class="form-control-static" th:text="${detail.loupan.cityName}"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">区域名</label>
+                                        <p class="form-control-static" th:text="${detail.loupan.districtName}"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">均价</label>
+                                        <p class="form-control-static" th:text="${detail.loupan.avgPrice}"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">楼盘地址</label>
+                                        <p class="form-control-static" th:text="${detail.loupan.address}"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">物业类型集合</label>
+                                        <p class="form-control-static" th:text="${detail.loupan.statFunctions}"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">建筑类型集合</label>
+                                        <p class="form-control-static" th:text="${detail.loupan.structFunctions}"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">产权年限集合</label>
+                                        <p class="form-control-static" th:text="${detail.loupan.ageLimits}"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">居室集合</label>
+                                        <p class="form-control-static" th:text="${detail.loupan.layouts}"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">装修情况</label>
+                                        <p class="form-control-static" th:text="${detail.loupan.decoItems}"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">开发商名</label>
+                                        <p class="form-control-static" th:text="${detail.loupan.developerName}"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">交通情况</label>
+                                        <p class="form-control-static" th:text="${detail.loupan.traffic}"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">配套设施</label>
+                                        <p class="form-control-static" th:text="${detail.loupan.equipment}"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">占地面积</label>
+                                        <p class="form-control-static" th:text="${detail.loupan.siteArea}"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">容积率</label>
+                                        <p class="form-control-static" th:text="${detail.loupan.ratio}"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">绿化率</label>
+                                        <p class="form-control-static" th:text="${detail.loupan.greenRate}"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">车位比</label>
+                                        <p class="form-control-static" th:text="${detail.loupan.carRate}"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">楼栋数</label>
+                                        <p class="form-control-static" th:text="${detail.loupan.buildingCnt}"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">总户数</label>
+                                        <p class="form-control-static" th:text="${detail.loupan.roomCnt}"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">物业费</label>
+                                        <p class="form-control-static" th:text="${detail.loupan.propertyFee}"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">物业公司名</label>
+                                        <p class="form-control-static" th:text="${detail.loupan.propertyName}"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">楼盘介绍</label>
+                                        <p class="form-control-static" th:text="${detail.loupan.description}"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">案场电话</label>
+                                        <p class="form-control-static" th:text="${detail.loupan.linkerPhone}"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">标签</label>
+                                        <p class="form-control-static" th:text="${detail.loupan.flag}"></p>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">图片信息</h3>
+                            </div>
+                            <div class="box-body table-responsive no-padding" v-cloak="">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <aside th:replace="admin/fragment/layout :: main-footer"></aside>
+        <div th:replace="admin/fragment/layout :: control-sidebar"></div>
+    </div>
+
+    <div th:replace="admin/fragment/common :: footer()"></div>
+</body>
+</html>
