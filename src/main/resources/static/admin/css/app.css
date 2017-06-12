@@ -4,3 +4,16 @@ body {
 [v-cloak] {
     display: none;
 }
+
+/*.content-header>.breadcrumb {*/
+    /*position: relative;*/
+    /*margin-top: 5px;*/
+    /*top: 0;*/
+    /*right: 0;*/
+    /*float: none;*/
+    /*background: #d2d6de;*/
+    /*padding-left: 10px;*/
+/*}*/
+/*.content-header>.breadcrumb li:before {*/
+    /*color: #97a0b3;*/
+/*}*/

@@ -4,23 +4,28 @@
 new Vue({
     el: '#loupan-list-page',
     data: {
-        loupanList: []
+        pagination: {}
     },
     created: function () {
         var that = this;
 
-        $.get('/api/loupan', function(data){
-            that.loupanList = data;
-        })
+        this.loadData();
     },
     computed: {
     },
     methods: {
-        loadData: function(){
+        loadData: function(pageNo){
             var that = this;
-            $.get('/api/loupan', function(data){
-                that.loupanList = data;
+            pageNo = pageNo || 1;
+            $.get('/api/loupanPage?pageNo=' + pageNo, function(data){
+                that.pagination = data;
             })
+        },
+        loadNext: function(){
+            this.loadData(this.pagination.pageNo + 1);
+        },
+        loadPrev: function(){
+            this.loadData(this.pagination.pageNo - 1);
         },
         buildParams: function(params){
             for(var k in params) {
