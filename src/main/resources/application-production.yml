@@ -13,3 +13,5 @@ com.goodlaike.wjw.datasource:
     validationQuery: select 1
     validationQueryTimeout: 1
     validationInterval: 120000
+    
+server.port: 80

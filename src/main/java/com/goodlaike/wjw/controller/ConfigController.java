@@ -51,4 +51,9 @@ public class ConfigController {
   protected String district(@RequestParam(value = "id", required = true) int id) {
     return RestUtil.exchange(this.resource.getDistrictUrl(), HttpMethod.GET, null, String.class, id);
   }
+
+  @RequestMapping("/it/ping")
+  protected long it() {
+    return System.currentTimeMillis();
+  }
 }
