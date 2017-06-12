@@ -31,7 +31,10 @@
 
 	<typeAliases>
 		<typeAlias type="com.goodlaike.wjw.view.LoupanListView"/>
-		<package name="com.goodlaike.wjw.model" />
+		<typeAlias type="com.goodlaike.wjw.model.Loupan"/>
+		<typeAlias type="com.goodlaike.wjw.model.LoupanPicture"/>
+		<typeAlias type="com.goodlaike.wjw.model.Pagination"/>
+		<typeAlias type="com.goodlaike.wjw.model.User"/>
 	</typeAliases>
 
 </configuration>

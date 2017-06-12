@@ -29,7 +29,7 @@ var app = new Vue({
                 var imgs = [];
                 for(var k in data.picMap){
                     for(var j = 0; j < data.picMap[k].length; j++){
-                        data.picMap[k][j].src = data.picMap[k][j].picUrl;
+                        data.picMap[k][j].src = '/imgs/'+data.picMap[k][j].picUrl;
                         data.picMap[k][j].w = 600;
                         data.picMap[k][j].h = 400;
                     }

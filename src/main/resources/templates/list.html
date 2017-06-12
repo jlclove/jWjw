@@ -33,12 +33,12 @@
         <div class="listview" v-for="item in items">
             <a class="media" v-bind:href="'/page/loupan/' + item.id">
                 <div class="media-left">
-                        <img class="media-object" v-bind:src="item.mainPic" alt="..."/>
+                        <img class="media-object" v-bind:src="'/imgs/'+item.mainPic" alt="..."/>
                 </div>
                 <div class="media-body">
                     <div class="media-heading f16">{{item.name}}</div>
                     <div class="media-info f12">
-                        <span>{{mergeArray(item.layout, '居', ' / ')}}</span>
+                        <span><span v-for="layout in item.layoutTypeList">{{ layout }} </span></span>
                         <span><span class="red bold"><span class="f16">{{item.avgPrice}}</span> 元/平</span></span>
                     </div>
                     <div class="media-info f12">{{item.districtName}} - {{item.address}}</div>

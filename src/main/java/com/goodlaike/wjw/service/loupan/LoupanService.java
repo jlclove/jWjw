@@ -137,8 +137,10 @@ public class LoupanService {
           break;
       }
     }
-    return this.loupanDao.findList(pageNo, pageSize, name, cityName, districtName,
+    List<LoupanListView> list = this.loupanDao.findList(pageNo, pageSize, name, cityName, districtName,
         FlagSupport.enFlag(EnumUtil.valuesOf(LayoutType.class, layouts, ",")), orderStr);
+    list.forEach((view) -> view.setLayoutTypeList(FlagSupport.deFlag(view.getLayouts(), LayoutType.class)));
+    return list;
   }
 
   /**

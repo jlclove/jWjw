@@ -1,6 +1,6 @@
 # DATASOURCE
 com.goodlaike.wjw.datasource: 
-    url: jdbc:mysql://rm-wz93f2rzc9ne11bi8.mysql.rds.aliyuncs.com/wjw?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC 
+    url: jdbc:mysql://rm-wz93f2rzc9ne11bi8o.mysql.rds.aliyuncs.com/wjw?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC 
     username: root_wjw
     password: Root_wjw
     driverClassName: com.mysql.cj.jdbc.Driver

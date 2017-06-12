@@ -1,5 +1,9 @@
 package com.goodlaike.wjw.view;
 
+import java.util.List;
+
+import com.goodlaike.wjw.dict.LayoutType;
+
 public class LoupanListView {
 
   /**
@@ -31,6 +35,8 @@ public class LoupanListView {
    * 居室集合
    */
   private int layouts;
+  
+  private List<LayoutType> layoutTypeList;
   
   /**
    * 列表主图
@@ -93,9 +99,17 @@ public class LoupanListView {
     this.mainPic = mainPic;
   }
 
+  public List<LayoutType> getLayoutTypeList() {
+    return this.layoutTypeList;
+  }
+
+  public void setLayoutTypeList(List<LayoutType> layoutTypeList) {
+    this.layoutTypeList = layoutTypeList;
+  }
+
   @Override
   public String toString() {
     return "LoupanListView [id=" + id + ", name=" + name + ", districtName=" + districtName + ", avgPrice=" + avgPrice + ", address="
-        + address + ", layouts=" + layouts + ", mainPic=" + mainPic + "]";
+        + address + ", layouts=" + layouts + ", layoutTypeList=" + layoutTypeList + ", mainPic=" + mainPic + "]";
   }
 }

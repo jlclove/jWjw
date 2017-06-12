@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.goodlaike.wjw.config.WebInterceptor;
 import com.goodlaike.wjw.model.LoupanPicture;
 import com.goodlaike.wjw.service.loupan.LoupanPictureService;
 import com.goodlaike.wjw.service.loupan.LoupanService;
@@ -67,7 +68,7 @@ public class LoupanPictureController extends BaseController {
     return this.loupanPictureService.insert(picList, super.pollLogined(request).getId());
   }
 
-  
+
   @RequestMapping(value = "/admin/loupan/pic/setMain", method = RequestMethod.POST)
   public void setMain(@RequestParam(value = "id") long id, HttpServletRequest request) {
     this.loupanPictureService.setMain(id);
@@ -167,16 +168,7 @@ public class LoupanPictureController extends BaseController {
    * @author Jail Hu
    */
   public String getFileSavePath() {
-    String saveDirectory = "imgs";
-    saveDirectory = saveDirectory.replaceAll("[\\/]", File.separator);
-    if (!saveDirectory.contains(":")) {
-      if (!saveDirectory.startsWith(File.separator)) {
-        saveDirectory = File.separator + saveDirectory;
-      }
-      String classPath = this.getClass().getClassLoader().getResource("").getPath();
-      saveDirectory = classPath.replace("/WEB-INF/classes/", "") + saveDirectory;
-    }
-
+    String saveDirectory = Thread.currentThread().getContextClassLoader().getResource(WebInterceptor.saveDirctory).getPath();
     File d = new File(saveDirectory);
     if (!d.exists()) {
       d.mkdirs();

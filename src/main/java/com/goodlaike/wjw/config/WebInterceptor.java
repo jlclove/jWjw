@@ -19,10 +19,14 @@ import com.goodlaike.wjw.view.UserView;
 @Configuration
 public class WebInterceptor extends WebMvcConfigurerAdapter {
 
+  public static final String saveDirctory = "imgs/";
+  
   @Override
   public void addResourceHandlers(ResourceHandlerRegistry registry) {
     CacheControl cacheControl = CacheControl.maxAge(1, TimeUnit.HOURS);
-    registry.addResourceHandler("/static/**", "/imgs/**").addResourceLocations("classpath:/static/").setCacheControl(cacheControl);
+    registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/").setCacheControl(cacheControl);
+    registry.addResourceHandler("/imgs/**")
+        .addResourceLocations("file://" + Thread.currentThread().getContextClassLoader().getResource(saveDirctory).getPath());
     super.addResourceHandlers(registry);
   }
 
@@ -30,9 +34,9 @@ public class WebInterceptor extends WebMvcConfigurerAdapter {
   public void addInterceptors(InterceptorRegistry registry) {
     registry.addInterceptor(loginedInterceptor()).addPathPatterns("/page/loupan/**", "/api/loupan/**").excludePathPatterns("/",
         "/api/loupan", "/static/**", "/imgs/**");
-    
-    registry.addInterceptor(adminLoginedInterceptor()).addPathPatterns("/admin/**")
-            .excludePathPatterns("/admin/login", "/static/**", "/imgs/**");
+
+    registry.addInterceptor(adminLoginedInterceptor()).addPathPatterns("/admin/**").excludePathPatterns("/admin/login", "/static/**",
+        "/imgs/**");
   }
 
   @Bean("loginedInterceptor")
