@@ -34,6 +34,17 @@ new Vue({
                 }
             }
             return params;
+        },
+        deleteLoupan: function(id){
+            if(confirm("是否删除此楼盘?")){
+                $.ajax({
+                    url: '/admin/loupan/' + id,
+                    type: 'delete',
+                    success: function(){
+                        window.location = '/admin/loupans'
+                    }
+                })
+            }
         }
     }
 })

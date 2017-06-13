@@ -39,6 +39,32 @@ var loupanAdd = new Vue({
             }
         })
     },
+    mounted: function(){
+        var that = this;
+        $("#addForm").validate({
+            messages: {
+                name: "必填",
+                cityName: "必填",
+                districtName: "必填",
+                linkerPhone: "必填",
+                password: {
+                    required: "Please provide a password",
+                    minlength: "Your password must be at least 5 characters long"
+                },
+                confirm_password: {
+                    required: "Please provide a password",
+                    minlength: "Your password must be at least 5 characters long",
+                    equalTo: "Please enter the same password as above"
+                },
+                email: "Please enter a valid email address",
+                agree: "Please accept our policy",
+                topic: "Please select at least 2 topics"
+            },
+            submitHandler: function(form) {
+                that.submit();
+            }
+        });
+    },
     computed: {
     },
     methods: {

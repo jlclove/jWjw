@@ -21,14 +21,14 @@
             </ol>
         </section>
         <!-- Main content -->
-        <section class="content">
 
+        <section class="content">
             <div v-if="showSuccess" class="alert alert-success alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                 <h4><i class="icon fa fa-check"></i> 操作成功!</h4>
                 3秒后自动跳转到列表页
             </div>
-
+            <form class="form-horizontal" id="addForm" action="" method="get">
             <div class="row">
                 <div class="col-md-6">
                     <div class="box">
@@ -37,17 +37,16 @@
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body table-responsive" v-cloak="">
-                            <form class="form-horizontal">
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">楼盘名</label>
                                     <div class="col-sm-7">
-                                        <input type="text" name="name" class="form-control" v-model="loupan.name"/>
+                                        <input type="text" name="name" class="form-control" v-model="loupan.name" required=""/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">城市名</label>
                                     <div class="col-sm-7">
-                                        <select name="cityName" class="form-control" v-model="loupan.cityName">
+                                        <select name="cityName" class="form-control" v-model="loupan.cityName" required="">
                                             <option v-bind:value="p.text" v-for="p in provinces">{{p.text}}</option>
                                         </select>
                                     </div>
@@ -55,7 +54,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">区域名</label>
                                     <div class="col-sm-7">
-                                        <select name="districtName" class="form-control" v-model="loupan.districtName">
+                                        <select name="districtName" class="form-control" v-model="loupan.districtName" required="">
                                             <option v-bind:value="d.name" v-for="d in districts">{{d.name}}</option>
                                         </select>
                                     </div>
@@ -202,14 +201,14 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">案场电话</label>
                                     <div class="col-sm-7"><input type="text" name="linkerPhone" class="form-control"
-                                                                 v-model="loupan.linkerPhone"/></div>
+                                                                 v-model="loupan.linkerPhone" required=""/></div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">标签</label>
                                     <div class="col-sm-7"><input type="text" name="flag" class="form-control"
                                                                  v-model="loupan.flag"/></div>
                                 </div>
-                            </form>
+
                         </div>
                     </div>
                 </div>
@@ -223,11 +222,15 @@
                         </div>
                     </div>
                 </div>
+
             </div>
             <div>
-                <a href="javascript:;" class="btn btn-primary btn-lg btn-flat" v-on:click="submit()">保存</a>
+                <input type="submit" class="btn btn-primary btn-md btn-flat" value="保存"/>
             </div>
+            </form>
+
         </section>
+
     </div>
 
     <aside th:replace="admin/fragment/layout :: main-footer"></aside>

@@ -56,13 +56,13 @@
                                         <a v-bind:href="'/admin/loupans/' + loupan.id">{{loupan.name}}</a>
                                     </td>
                                     <td>{{loupan.districtName}}</td>
-                                    <td>{{loupan.layouts}}</td>
+                                    <td>{{loupan.layoutTypeList.join(", ")}}</td>
                                     <td>{{loupan.avgPrice}}</td>
                                     <td>{{loupan.address}}</td>
                                     <td>
                                         <button class="btn btn-sm btn-default btn-flat">
                                             <i class="fa fa-edit"></i> 编辑</button>
-                                        <button class="btn btn-sm btn-danger btn-flat">
+                                        <button class="btn btn-sm btn-danger btn-flat" v-on:click="deleteLoupan(loupan.id)">
                                             <i class="fa fa-trash"></i> 删除</button>
                                     </td>
                                 </tr>
