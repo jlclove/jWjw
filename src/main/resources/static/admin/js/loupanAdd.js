@@ -5,8 +5,8 @@ var loupanAdd = new Vue({
     el: '#loupan-add-page',
     data: {
         loupan: {},
-        loupanList: [],
         config: {},
+        picList: [],
         provinces: [],
         districts: [],
         showSuccess: false
@@ -14,12 +14,11 @@ var loupanAdd = new Vue({
     created: function () {
         var that = this;
 
-        $.get('/api/loupan', function(data){
-            that.loupanList = data;
-        });
-
         $.get('/config', function(data){
             that.config = data;
+            setTimeout(function(){
+                that.initEvent();
+            }, 100);
         })
         $.get('/config/province', function(data){
             var list = [];
@@ -31,7 +30,6 @@ var loupanAdd = new Vue({
                 $.get('/config/district?id=' + list[0].value, function(data){
                     try {
                         that.districts = JSON.parse(data).result[0];
-                        console.log(that.districts);
                     } catch(e){
 
                     }
@@ -46,19 +44,7 @@ var loupanAdd = new Vue({
                 name: "必填",
                 cityName: "必填",
                 districtName: "必填",
-                linkerPhone: "必填",
-                password: {
-                    required: "Please provide a password",
-                    minlength: "Your password must be at least 5 characters long"
-                },
-                confirm_password: {
-                    required: "Please provide a password",
-                    minlength: "Your password must be at least 5 characters long",
-                    equalTo: "Please enter the same password as above"
-                },
-                email: "Please enter a valid email address",
-                agree: "Please accept our policy",
-                topic: "Please select at least 2 topics"
+                linkerPhone: "必填"
             },
             submitHandler: function(form) {
                 that.submit();
@@ -101,6 +87,23 @@ var loupanAdd = new Vue({
                 }
             });
         },
+        savePic: function(){
+            var that = this;
+            $.ajax({
+                type: 'post',
+                url: '/admin/loupan/pic',
+                data: this.loupan,
+                success: function(res) {
+                    that.showSuccess = true;
+                    setTimeout(function(){
+                        window.location.href = "/admin/loupans"
+                    }, 3000);
+                },
+                failure: function(res) {
+                    that.showSuccess = false;
+                }
+            });
+        },
         onPropChange: function(evt, item, key){
             this.loupan[key] = this.loupan[key] || [];
             var checked = evt.currentTarget.checked;
@@ -114,12 +117,6 @@ var loupanAdd = new Vue({
             }
             console.log(this.loupan);
         },
-        loadData: function(){
-            var that = this;
-            $.get('/api/loupan', function(data){
-                that.loupanList = data;
-            })
-        },
         buildParams: function(params){
             for(var k in params) {
                 if(!params[k]) {
@@ -127,6 +124,23 @@ var loupanAdd = new Vue({
                 }
             }
             return params;
+        },
+        initEvent: function(){
+            var that = this;
+            $('input[type=file]').fileupload({
+                paramName: 'file',
+                url: '/admin/loupan/pic/upload',
+                autoUpload: true,
+                acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+                maxFileSize: 10*1024*1024
+            }).on('fileuploaddone', function (e, data) {
+                that.picList.push({
+                    type: $(this).data('type'),
+                    picUrl: data.result,
+                });
+                console.log($(this).data('type'));
+                console.log(data.result);
+            })
         }
     }
 });

@@ -217,8 +217,17 @@
                         <div class="box-header with-border">
                             <h3 class="box-title">图片信息</h3>
                         </div>
-                        <div class="box-body table-responsive no-padding" v-cloak="">
-
+                        <div class="box-body table-responsive" v-cloak="">
+                            <div class="form-group" v-for="type in config.pictureType">
+                                <label class="col-sm-3 control-label">{{type.name}}</label>
+                                <div class="col-sm-2">
+                                    <span class="btn btn-primary btn-sm fileinput-button">
+                                        <i class="fa fa-plus"></i>
+                                        <span>上传</span>
+                                        <input v-bind:id="type.value" type="file" v-bind:data-type="type.value"/>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
