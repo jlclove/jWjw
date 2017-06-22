@@ -35,6 +35,8 @@ public class LoupanPictureController extends BaseController {
   @Autowired
   private LoupanPictureService loupanPictureService;
 
+  @Autowired
+  private WebInterceptor webInterceptor;
 
 
   /**
@@ -160,6 +162,7 @@ public class LoupanPictureController extends BaseController {
     is.close();
     return newFileName;
   }
+  
 
   /**
    * 获得图片保存路径
@@ -168,7 +171,7 @@ public class LoupanPictureController extends BaseController {
    * @author Jail Hu
    */
   public String getFileSavePath() {
-    String saveDirectory = Thread.currentThread().getContextClassLoader().getResource(WebInterceptor.saveDirctory).getPath();
+    String saveDirectory = this.webInterceptor.getSaveDirectory().replaceAll("file:", "");
     File d = new File(saveDirectory);
     if (!d.exists()) {
       d.mkdirs();

@@ -1,10 +1,13 @@
 package com.goodlaike.wjw.config;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.CacheControl;
@@ -14,20 +17,61 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import com.goodlaike.wjw.Application;
 import com.goodlaike.wjw.view.UserView;
 
 @Configuration
 public class WebInterceptor extends WebMvcConfigurerAdapter {
 
-  public static final String saveDirctory = "imgs/";
-  
+  private Logger logger = LoggerFactory.getLogger(WebInterceptor.class);
+
+
+  private String imgPath;
+  private String saveDirctory;
+
   @Override
   public void addResourceHandlers(ResourceHandlerRegistry registry) {
     CacheControl cacheControl = CacheControl.maxAge(1, TimeUnit.HOURS);
     registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/").setCacheControl(cacheControl);
-    registry.addResourceHandler("/imgs/**")
-        .addResourceLocations("file://" + Thread.currentThread().getContextClassLoader().getResource(saveDirctory).getPath());
+    registry.addResourceHandler("/imgs/**").addResourceLocations(this.getImgPath());
     super.addResourceHandlers(registry);
+  }
+
+  private String getImgPath() {
+    imgPath = Application.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+    if (imgPath.contains(".jar")) {
+      logger.info("===========>>> img url contains \".jar\" = [{}]", imgPath);
+      imgPath = imgPath.substring(0, imgPath.indexOf(".jar"));
+      logger.info("===========>>> img url removed \".jar\" = [{}]", imgPath);
+      imgPath = imgPath.substring(0, imgPath.lastIndexOf("/") + 1);
+      logger.info("===========>>> img url removed \"{}\" = [{}]", "/", imgPath);
+    }
+    imgPath += "imgs/";
+    logger.info("===========>>> load imgs path = [{}]", imgPath);
+    return imgPath;
+  }
+
+  public String getSaveDirectory() {
+    if (saveDirctory == null) {
+      saveDirctory = this.getImgPath();
+      if (saveDirctory.startsWith("file:")) {
+        saveDirctory = saveDirctory.replaceFirst("file:", "");
+      }
+    }
+    return saveDirctory;
+  }
+
+
+  public static void main(String[] args) {
+    String imgPath = "file://D:/workspace/fang-wap.jar";
+    if (imgPath.contains(".jar")) {
+      System.out.println("===========>>> img url contains \".jar\" = [" + imgPath + "]");
+      imgPath = imgPath.substring(0, imgPath.indexOf(".jar"));
+      System.out.println(imgPath);
+      System.out.println("====" + File.separator);
+      imgPath = imgPath.substring(0, imgPath.lastIndexOf("/") + 1);
+      System.out.println(imgPath);
+    }
   }
 
   @Override

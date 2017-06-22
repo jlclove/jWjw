@@ -55,5 +55,4 @@
 	<springProfile name="!production">
 		<logger name="dao" level="DEBUG" />
 	</springProfile>
-	
 </configuration>  
