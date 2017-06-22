@@ -50,7 +50,7 @@
 			<appender-ref ref="STDOUT" />
 		</springProfile>
 		<appender-ref ref="INFO" />
-		<appender-ref ref="ERROR" />
+		<appender-ref ref="ERROR" /> 
 	</root>
 	<springProfile name="!production">
 		<logger name="dao" level="DEBUG" />
