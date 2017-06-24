@@ -35,16 +35,44 @@
             <hr/>
             <div class="container">
                 <p><span class="text-label">主力户型</span> <span v-for="item in layoutTypeList">{{ item }} </span></p>
-                <p><span class="text-label">项目地址</span>{{loupan.address?loupan.address:'未填写'}}</p>
+                <p class="inline"><span class="text-label">项目地址</span><span class="field">{{loupan.address?loupan.address:'未填写'}}</span></p>
                 <div class="row">
-                    <div class="col-xs-6"><p><span class="text-label">物业类型</span><span v-for="item in statFunctionList">{{ item }} </span></p></div>
-                    <div class="col-xs-6"><p><span class="text-label">建筑类型</span><span v-for="item in structFunctionList">{{ item }} </span></p></div>
+                    <div class="col-xs-6">
+                        <p>
+                            <span class="text-label">物业类型</span>
+                            <span class="field">
+                                <span v-for="item in statFunctionList">{{ item }} </span>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="col-xs-6">
+                        <p>
+                            <span class="text-label">建筑类型</span>
+                            <span class="field">
+                                <span v-for="item in structFunctionList">{{ item }} </span>
+                            </span>
+                        </p>
+                    </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-6"><p><span class="text-label">装修</span><span v-for="item in decoItemList">{{ item }} </span></p></div>
-                    <div class="col-xs-6"><p><span class="text-label">产权年限</span><span v-for="item in ageLimitList">{{ item }} </span></p></div>
+                    <div class="col-xs-6">
+                        <p>
+                            <span class="text-label">装修</span>
+                            <span class="field">
+                                <span v-for="item in decoItemList">{{ item }} </span>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="col-xs-6">
+                        <p>
+                            <span class="text-label">产权年限</span>
+                            <span class="field">
+                                <span v-for="item in ageLimitList">{{ item }} </span>
+                            </span>
+                        </p>
+                    </div>
                 </div>
-                <div><span class="text-label">开发商</span>{{loupan.developerName}}</div>
+                <div class="inline"><span class="text-label">开发商</span><span class="field">{{loupan.developerName}}</span></div>
             </div>
             <hr/>
             <div class="container">

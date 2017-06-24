@@ -18,7 +18,7 @@ var app = new Vue({
         var that = this;
 
         $.get('/config', function(data){
-            that.layoutType = data.layoutType;
+            that.layoutType = [{name: "不限", value: undefined}].concat(data.layoutType);
             that.orderType = data.orderType;
         })
 
@@ -71,8 +71,8 @@ var app = new Vue({
             $.get('/api/loupan', this.buildParams({
                 name: this.filterParams.name,
                 cityName: this.filterParams.cityName,
-                districtName: this.filterParams.districtName,
-                layouts: this.filterParams.layouts,
+                districtName: this.filterParams.districtName !='不限' ? this.filterParams.districtName : undefined,
+                layouts: this.filterParams.layouts !='不限' ? this.filterParams.layouts : undefined,
                 order: this.filterParams.order
             }), function(data){
                 that.items = data;
@@ -98,7 +98,7 @@ var app = new Vue({
 
                 $.get('/config/district', {id: province.id}, function(data){
                     data = JSON.parse(data);
-                    that.districts = data.result[0];
+                    that.districts = [{name: "不限"}].concat(data.result[0]);
                 })
                 cb && cb();
             })
@@ -107,7 +107,7 @@ var app = new Vue({
             var that = this;
             $.get('/config/district', {id: pid}, function(data){
                 data = JSON.parse(data);
-                that.districts = data.result[0];
+                that.districts = [{name: "不限"}].concat(data.result[0]);
                 cb && cb();
             })
         },

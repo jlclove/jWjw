@@ -90,3 +90,13 @@
 .btn-contact:focus,.btn-contact:hover {
     color: #fff;
 }
+.col-xs-6 {
+    width: 100%;
+}
+.inline .text-label {
+    float: left;
+}
+.inline .field {
+    margin-left: 74px;
+    display: block;
+}

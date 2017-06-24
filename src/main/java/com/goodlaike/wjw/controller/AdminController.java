@@ -37,7 +37,7 @@ public class AdminController extends BaseController {
   @RequestMapping("/loupans/{id}")
   protected String adminLoupanDetail(@PathVariable(value = "id") long id, HttpServletRequest request, Model model) {
     model.addAttribute("menuId", "loupans");
-    model.addAttribute("detail", this.loupanService.findDetailById(id));
+    model.addAttribute("id", id);
     return "admin/loupanDetail";
   }
 

@@ -2,7 +2,7 @@
  * Created by charles on 17/6/7.
  */
 var loupanAdd = new Vue({
-    el: '#loupan-add-page',
+    el: '#loupan-edit-page',
     data: {
         loupan: {},
         config: {},
@@ -36,6 +36,8 @@ var loupanAdd = new Vue({
                 })
             }
         })
+        this.loupan = loupan.loupan;
+        console.log(loupan);
     },
     mounted: function(){
         var that = this;
