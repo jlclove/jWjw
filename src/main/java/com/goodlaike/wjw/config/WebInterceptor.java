@@ -1,6 +1,7 @@
 package com.goodlaike.wjw.config;
 
 import java.io.File;
+import java.net.URLEncoder;
 import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
@@ -132,7 +133,7 @@ public class WebInterceptor extends WebMvcConfigurerAdapter {
         return true;
       } else {
         // throw new UnloginedException();
-        response.sendRedirect("/admin/login");
+        response.sendRedirect("/admin/login?msg=" + URLEncoder.encode("非法登录用户", "utf-8"));
         return false;
       }
     }

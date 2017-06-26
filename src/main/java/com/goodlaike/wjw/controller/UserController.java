@@ -47,6 +47,19 @@ public class UserController extends BaseController {
     return super.pollLogined(request);
   }
 
+  /**
+   * 退出登录
+   */
+  @RequestMapping(value = "/user/logout", method = RequestMethod.GET)
+  public boolean logout(HttpServletRequest request) {
+    try {
+      super.removeLogin(request);
+      return true;
+    } catch (Exception e) {
+      return false;
+    }
+  }
+
 
   /**
    * 添加用户
@@ -66,7 +79,7 @@ public class UserController extends BaseController {
     UserView user = super.pollLogined(request);
     return this.userService.deleteUser(id, user.getId());
   }
-  
+
   /**
    * 获得用户信息
    */

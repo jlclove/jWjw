@@ -23,6 +23,11 @@ public abstract class BaseController {
     HttpSession session = request.getSession(true);
     session.setAttribute(IConstants.SESSION_USER, user);
   }
+  
+  protected void removeLogin(HttpServletRequest request) {
+    HttpSession session = request.getSession(true);
+    session.removeAttribute(IConstants.SESSION_USER);
+  }
 
   @ExceptionHandler(value = UnloginedException.class)
   public ResponseEntity<?> unlogined() {
