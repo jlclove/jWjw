@@ -59,12 +59,20 @@ public class UserController extends BaseController {
   }
 
   /**
-   * 添加用户
+   * 删除用户
    */
   @RequestMapping(value = "/admin/user/{id}", method = RequestMethod.DELETE)
   public boolean deleteUser(HttpServletRequest request, @PathVariable(value = "id") int id) {
     UserView user = super.pollLogined(request);
     return this.userService.deleteUser(id, user.getId());
+  }
+  
+  /**
+   * 获得用户信息
+   */
+  @RequestMapping(value = "/admin/user/{id}", method = RequestMethod.GET)
+  public UserView getUser(HttpServletRequest request, @PathVariable(value = "id") int id) {
+    return this.userService.findUserView(id);
   }
 
   /**
