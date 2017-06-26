@@ -47,6 +47,11 @@ public class WebInterceptor extends WebMvcConfigurerAdapter {
       logger.info("===========>>> img url removed \"{}\" = [{}]", "/", imgPath);
     }
     imgPath += "imgs/";
+
+    if (!imgPath.startsWith("file:")) {
+      imgPath = "file:" + imgPath;
+    }
+
     logger.info("===========>>> load imgs path = [{}]", imgPath);
     return imgPath;
   }
