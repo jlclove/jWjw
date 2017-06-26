@@ -41,8 +41,10 @@ var app = new Vue({
         }
     },
     methods: {
+        onSearch: function (e) {
+            this.loadData();
+        },
         onBackdropClick: function(e){
-            console.log(e)
         },
         onChooseDistrict: function(v){
             this.filterParams.districtName = v;

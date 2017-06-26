@@ -1,22 +1,31 @@
 body {
     /*font-family: "PingFang SC","Lantinghei SC","Microsoft YaHei",'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
 }
+
 [v-cloak] {
     display: none;
 }
+
 label.error {
     color: rgb(255, 69, 69);
 }
 
+.upload-thumbnail {
+    display: inline-block;
+    width: 110px;
+    height: 150px;
+    vertical-align: top
+}
+
 /*.content-header>.breadcrumb {*/
-    /*position: relative;*/
-    /*margin-top: 5px;*/
-    /*top: 0;*/
-    /*right: 0;*/
-    /*float: none;*/
-    /*background: #d2d6de;*/
-    /*padding-left: 10px;*/
+/*position: relative;*/
+/*margin-top: 5px;*/
+/*top: 0;*/
+/*right: 0;*/
+/*float: none;*/
+/*background: #d2d6de;*/
+/*padding-left: 10px;*/
 /*}*/
 /*.content-header>.breadcrumb li:before {*/
-    /*color: #97a0b3;*/
+/*color: #97a0b3;*/
 /*}*/

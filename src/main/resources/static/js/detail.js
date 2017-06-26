@@ -11,7 +11,9 @@ var app = new Vue({
         flagList: [],
         ageLimitList: [],
         decoItemList: [],
-        imageList: []
+        imageList: [],
+        allImages: {},
+        config: {}
     },
     created: function () {
         var params = window.location.pathname.match(/\/page\/loupan\/(\d+)/);
@@ -35,15 +37,25 @@ var app = new Vue({
                     }
                     imgs.push(data.picMap[k]);
                 }
-                that.imageList = imgs[0];
+                that.allImages = imgs;
+                that.imageList = that.allImages[0];
                 setTimeout(function(){
                     initSwiper();
                 }, 60);
             })
         }
+        $.get('/config', function(data){
+            that.config = data;
+        })
     },
     computed: {},
     methods: {
+        switchImgCate: function(type){
+            this.imageList = this.allImages[type];
+            setTimeout(function(){
+                initSwiper();
+            }, 60);
+        },
         back: function(){
             window.history.back();
         },

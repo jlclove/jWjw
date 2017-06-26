@@ -8,6 +8,7 @@ var loupanAdd = new Vue({
         config: {},
         picList: [],
         provinces: [],
+        provinceMap: {},
         districts: [],
         showSuccess: false
     },
@@ -21,6 +22,7 @@ var loupanAdd = new Vue({
             }, 100);
         })
         $.get('/config/province', function(data){
+            that.provinceMap = data;
             var list = [];
             for(var k in data) {
                 list.push({text: data[k], value: k})
@@ -72,11 +74,33 @@ var loupanAdd = new Vue({
             if(this.loupan.layouts) {
                 this.loupan.layouts = this.loupan.layouts.join(",");
             }
+            if(this.loupan.flags) {
+                this.loupan.flags = this.loupan.flags.join(",");
+            }
             var that = this;
             $.ajax({
                 type: 'post',
                 url: '/admin/loupan',
                 data: this.loupan,
+                success: function(res) {
+                    that.savePic(res);
+                },
+                failure: function(res) {
+                    that.showSuccess = false;
+                }
+            });
+        },
+        savePic: function(id){
+            var that = this;
+            this.picList.forEach(function(item){
+               item.loupanId = id
+            });
+            $.ajax({
+                type: 'post',
+                url: '/admin/loupan/pic',
+                contentType: "application/json",
+                dataType: "json",
+                data: JSON.stringify(this.picList),
                 success: function(res) {
                     that.showSuccess = true;
                     setTimeout(function(){
@@ -88,22 +112,11 @@ var loupanAdd = new Vue({
                 }
             });
         },
-        savePic: function(){
-            var that = this;
-            $.ajax({
-                type: 'post',
-                url: '/admin/loupan/pic',
-                data: this.loupan,
-                success: function(res) {
-                    that.showSuccess = true;
-                    setTimeout(function(){
-                        window.location.href = "/admin/loupans"
-                    }, 3000);
-                },
-                failure: function(res) {
-                    that.showSuccess = false;
-                }
+        setMain: function(pic){
+            this.picList.forEach(function(item){
+                item.main = false;
             });
+            pic.main = true;
         },
         onPropChange: function(evt, item, key){
             this.loupan[key] = this.loupan[key] || [];
@@ -116,7 +129,19 @@ var loupanAdd = new Vue({
             if(!checked && idx >= 0) {
                 this.loupan[key].splice(idx, 1);
             }
-            console.log(this.loupan);
+        },
+        onChooseCity: function(e){
+            var value = e.target.value;
+            this.loupan.cityName = this.provinceMap[value];
+            this.loadDistricts(value);
+        },
+        loadDistricts: function(pid, cb){
+            var that = this;
+            $.get('/config/district', {id: pid}, function(data){
+                data = JSON.parse(data);
+                that.districts = [{name: "不限"}].concat(data.result[0]);
+                cb && cb();
+            })
         },
         buildParams: function(params){
             for(var k in params) {
@@ -147,8 +172,6 @@ var loupanAdd = new Vue({
                     if(idx >= 0) {
                         that.picList.splice(idx, 1);
                     }
-                    console.log(that.picList);
-                    // updateFormData();
                 });
             $('input[type=file]').fileupload({
                 paramName: 'file',
@@ -163,7 +186,7 @@ var loupanAdd = new Vue({
             })
             .on('fileuploadadd', function (e, data) {
                 var fileWrap = $(e.target).closest('.form-group').find('.files');
-                data.context = $('<div style="display: inline-block;width: 110px;height: 150px;vertical-align: top"/>').appendTo(fileWrap);
+                data.context = $('<div class="upload-thumbnail"/>').appendTo(fileWrap);
                 $.each(data.files, function (index, file) {
                     var node = $('<p/>');
                     if (!index) {
@@ -191,11 +214,25 @@ var loupanAdd = new Vue({
                         .attr('target', '_blank')
                         .css('display', 'block')
                         .prop('href', '/imgs/' + file);
-                    $($(data.context.children()[0]).children()[0]).wrap(link);
-                    that.picList.push({
-                        type: $(this).data('type'),
+                    var wrap = $($(data.context.children()[0]).children()[0]).wrap(link);
+                    var imgObj = {
+                        type: $(this).data('img-type'),
                         picUrl: file
-                    })
+                    };
+                    var btnSetMain = $('<label style="margin-left: 10px;"><input name="set-main" type="radio"/> 首图</label>');
+                    btnSetMain.on('change', function(e){
+                        e.stopPropagation();
+                        that.setMain(imgObj);
+                        return false;
+                    });
+                    wrap.parent().parent().append(btnSetMain);
+                    if(that.picList.length == 0) {
+                        imgObj.main = true;
+                        btnSetMain.find('input').attr('checked', true);
+                    } else {
+                        imgObj.main = false;
+                    }
+                    that.picList.push(imgObj);
                     // updateFormData();
                 } else if (file.error) {
                     var error = $('<span class="text-danger"/>').text(file.error);

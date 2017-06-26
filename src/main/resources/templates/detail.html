@@ -20,10 +20,7 @@
             <div class="swiper-pagination"></div>
             <div class="swiper-back" v-on:click="back()"></div>
             <div class="swiper-footer">
-                <span>效果图
-                </span><span>实景图
-                </span><span>户型图
-                </span><span>交通配套</span>
+                <span v-for="type in config.pictureType" v-on:click="switchImgCate(type.value)" v-bind:data-value="type.value">{{type.name}}</span>
             </div>
         </div>
         <div class="box" v-cloak="">

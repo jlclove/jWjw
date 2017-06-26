@@ -20,9 +20,11 @@
         </div>
 
         <div class="container">
+            <form v-on:submit.prevent="onSearch" action="/">
             <div class="btn-search">
-                <input type="text" class="form-control" placeholder="请输入楼盘名称" v-model="filterParams.name"/>
+                <input type="search" name="name" class="form-control" autocomplete="off" placeholder="请输入楼盘名称" v-model="filterParams.name"/>
             </div>
+            </form>
         </div>
         <div class="filter-group mt_10" v-on:click="showFilterPanel=true">
             <div class="filter" v-on:click="filterTabIdx=1"><span>{{filterParams.districtName || '区域'}}</span></div>

@@ -26,174 +26,251 @@
             </section>
             <!-- Main content -->
             <section class="content">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="box">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">基本信息</h3>
-                            </div>
-                            <!-- /.box-header -->
-                            <div class="box-body table-responsive no-padding">
-                                <form class="form-horizontal">
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">楼盘名</label>
-                                        <div class="col-sm-8">
-                                            <p class="form-control-static">{{loupan.name}}</p>
+                <form class="form-horizontal" id="editForm" action="" method="get">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="box">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">基本信息</h3>
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body table-responsive">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">楼盘名</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" name="name" class="form-control" v-model="loupan.name" required=""/>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">城市名</label>
-                                        <div class="col-sm-8">
-                                        <p class="form-control-static">{{loupan.cityName}}</p>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">城市名</label>
+                                            <div class="col-sm-7">
+                                                <select name="cityName" class="form-control"
+                                                        v-on:change="onChooseCity" required="">
+                                                    <option v-bind:value="p.value" v-for="p in provinces">{{p.text}}</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">区域名</label>
-                                        <div class="col-sm-8">
-                                        <p class="form-control-static">{{loupan.districtName}}</p>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">区域名</label>
+                                            <div class="col-sm-7">
+                                                <select name="districtName" class="form-control" v-model="loupan.districtName" required="">
+                                                    <option v-bind:value="d.name" v-for="d in districts">{{d.name}}</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">均价</label>
-                                        <div class="col-sm-8">
-                                        <p class="form-control-static">{{loupan.avgPrice}}</p>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">均价</label>
+                                            <div class="col-sm-4">
+                                                <input type="number" name="avgPrice" class="form-control"
+                                                       v-model="loupan.avgPrice" max="9999999" min="0"/>
+                                            </div>
+                                            <p class="form-control-static">万/平</p>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">楼盘地址</label>
-                                        <div class="col-sm-8">
-                                        <p class="form-control-static">{{loupan.address}}</p>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">楼盘地址</label>
+                                            <div class="col-sm-7"><textarea type="text" name="address" class="form-control"
+                                                                            v-model="loupan.address" maxlength="60" rows="2"/></div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">物业类型集合</label>
-                                        <div class="col-sm-8">
-                                        <p class="form-control-static">{{loupan.statFunctions}}</p>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">物业类型集合</label>
+                                            <div class="col-sm-7">
+                                                <div class="checkbox">
+                                                    <template v-for="item in config.statFunction">
+                                                        <label style="margin-right: 10px;">
+                                                            <input type="checkbox" name="statFunctions"
+                                                                   v-bind:checked="loupan.statFunctions.indexOf(item.value)>=0"
+                                                                   v-on:change="onPropChange(event, item, 'statFunctions')"/>  {{item.name}}
+                                                        </label>
+                                                    </template>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">建筑类型集合</label>
-                                        <div class="col-sm-8">
-                                        <p class="form-control-static">{{loupan.structFunctions}}</p>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">建筑类型集合</label>
+                                            <div class="col-sm-7">
+                                                <div class="checkbox">
+                                                    <template v-for="item in config.structFunction">
+                                                        <label style="margin-right: 10px;">
+                                                            <input type="checkbox" name="structFunctions"
+                                                                   v-bind:checked="loupan.structFunctions.indexOf(item.value)>=0"
+                                                                   v-on:change="onPropChange(event, item, 'structFunctions')"/>  {{item.name}}
+                                                        </label>
+                                                    </template>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">产权年限集合</label>
-                                        <div class="col-sm-8">
-                                        <p class="form-control-static">{{loupan.ageLimits}}</p>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">产权年限集合</label>
+                                            <div class="col-sm-7">
+                                                <div class="checkbox">
+                                                    <template v-for="item in config.ageLimit">
+                                                        <label style="margin-right: 10px;">
+                                                            <input type="checkbox" name="ageLimits"
+                                                                   v-bind:checked="loupan.ageLimits.indexOf(item.value)>=0"
+                                                                   v-on:change="onPropChange(event, item, 'ageLimits')"/>  {{item.name}}
+                                                        </label>
+                                                    </template>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">居室集合</label>
-                                        <div class="col-sm-8">
-                                        <p class="form-control-static">{{loupan.layouts}}</p>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">居室集合</label>
+                                            <div class="col-sm-7">
+                                                <div class="checkbox">
+                                                    <template v-for="item in config.layoutType">
+                                                        <label style="margin-right: 10px;">
+                                                            <input type="checkbox" name="layouts"
+                                                                   v-bind:checked="loupan.layouts.indexOf(item.value)>=0"
+                                                                   v-on:change="onPropChange(event, item, 'layouts')"/>  {{item.name}}
+                                                        </label>
+                                                    </template>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">装修情况</label>
-                                        <div class="col-sm-8">
-                                        <p class="form-control-static">{{loupan.decoItems}}</p>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">装修情况</label>
+                                            <div class="col-sm-7">
+                                                <div class="checkbox">
+                                                    <template v-for="item in config.decoItem">
+                                                        <label style="margin-right: 10px;">
+                                                            <input type="checkbox" name="decoItems"
+                                                                   v-bind:checked="loupan.decoItems.indexOf(item.value)>=0"
+                                                                   v-on:change="onPropChange(event, item, 'decoItems')"/>  {{item.name}}
+                                                        </label>
+                                                    </template>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">开发商名</label>
-                                        <div class="col-sm-8">
-                                        <p class="form-control-static">{{loupan.developerName}}</p>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">开发商名</label>
+                                            <div class="col-sm-7"><input type="text" name="developerName" class="form-control"
+                                                                         v-model="loupan.developerName" maxlength="45"/></div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">交通情况</label>
-                                        <div class="col-sm-8">
-                                        <p class="form-control-static">{{loupan.traffic}}</p>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">交通情况</label>
+                                            <div class="col-sm-7"><textarea type="text" name="traffic" class="form-control"
+                                                                            v-model="loupan.traffic" maxlength="200" rows="4"/></div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">配套设施</label>
-                                        <div class="col-sm-8">
-                                        <p class="form-control-static">{{loupan.equipment}}</p>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">配套设施</label>
+                                            <div class="col-sm-7"><textarea type="text" name="equipment" class="form-control"
+                                                                            v-model="loupan.equipment" maxlength="200" rows="4"/></div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">占地面积</label>
-                                        <div class="col-sm-8">
-                                        <p class="form-control-static">{{loupan.siteArea}}</p>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">占地面积</label>
+                                            <div class="col-sm-4"><input type="number" name="siteArea" class="form-control"
+                                                                         v-model="loupan.siteArea" max="9999999" min="0"/></div>
+                                            <p class="form-control-static">平米</p>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">容积率</label>
-                                        <div class="col-sm-8">
-                                        <p class="form-control-static">{{loupan.ratio}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">绿化率</label>
-                                        <div class="col-sm-8">
-                                        <p class="form-control-static">{{loupan.greenRate}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">车位比</label>
-                                        <div class="col-sm-8">
-                                        <p class="form-control-static">{{loupan.carRate}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">楼栋数</label>
-                                        <div class="col-sm-8">
-                                        <p class="form-control-static">{{loupan.buildingCnt}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">总户数</label>
-                                        <div class="col-sm-8">
-                                        <p class="form-control-static">{{loupan.roomCnt}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">物业费</label>
-                                        <div class="col-sm-8">
-                                        <p class="form-control-static">{{loupan.propertyFee}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">物业公司名</label>
-                                        <div class="col-sm-8">
-                                        <p class="form-control-static">{{loupan.propertyName}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">楼盘介绍</label>
-                                        <div class="col-sm-8">
-                                        <p class="form-control-static">{{loupan.description}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">案场电话</label>
-                                        <div class="col-sm-8">
-                                        <p class="form-control-static">{{loupan.linkerPhone}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">标签</label>
-                                        <div class="col-sm-8">
-                                        <p class="form-control-static">{{loupan.flag}}</p>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="box">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">图片信息</h3>
-                            </div>
-                            <div class="box-body table-responsive no-padding">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">容积率</label>
+                                            <div class="col-sm-4">
+                                                <input type="number" name="ratio" class="form-control"
+                                                       v-model="loupan.ratio" max="100" min="0"/>
+                                            </div>
+                                            <p class="form-control-static">%</p>
 
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">绿化率</label>
+                                            <div class="col-sm-4">
+                                                <input type="number" name="greenRate" class="form-control"
+                                                       v-model="loupan.greenRate" max="100" min="0"/></div>
+                                            <p class="form-control-static">%</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">车位比</label>
+                                            <div class="col-sm-7"><input type="text" name="carRate" class="form-control"
+                                                                         v-model="loupan.carRate" maxlength="15"/></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">楼栋数</label>
+                                            <div class="col-sm-4"><input type="number" name="buildingCnt" class="form-control"
+                                                                         v-model="loupan.buildingCnt"/></div>
+                                            <p class="form-control-static">栋</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">总户数</label>
+                                            <div class="col-sm-4"><input type="number" name="roomCnt" class="form-control"
+                                                                         v-model="loupan.roomCnt"/></div>
+                                            <p class="form-control-static">户</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">物业费</label>
+                                            <div class="col-sm-4"><input type="number" name="propertyFee" class="form-control"
+                                                                         v-model="loupan.propertyFee" min="0" max="9999999"/></div>
+                                            <p class="form-control-static">元/平米/月</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">物业公司名</label>
+                                            <div class="col-sm-7"><textarea name="propertyName" class="form-control"
+                                                                            v-model="loupan.propertyName" maxlength="45" rows="2"/></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">楼盘介绍</label>
+                                            <div class="col-sm-7"><textarea name="description" class="form-control"
+                                                                            v-model="loupan.description" maxlength="500" rows="8"/></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">案场电话</label>
+                                            <div class="col-sm-7"><input type="text" name="linkerPhone" class="form-control"
+                                                                         v-model="loupan.linkerPhone" required="" maxlength="20"/></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">标签</label>
+                                            <div class="col-sm-7">
+
+                                                <div class="checkbox">
+                                                    <template v-for="item in config.flag">
+                                                        <label style="margin-right: 10px;">
+                                                            <input type="checkbox" name="flag"
+                                                                   v-bind:checked="loupan.flags.indexOf(item.value)>=0"
+                                                                   v-on:change="onPropChange(event, item, 'flags')"/>  {{item.name}}
+                                                        </label>
+                                                    </template>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="box">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">图片信息</h3>
+                                </div>
+                                <div class="box-body table-responsive" v-cloak="">
+                                    <div class="form-group" v-for="type in config.pictureType">
+                                        <label class="col-sm-3 control-label">{{type.name}}</label>
+                                        <div class="col-sm-9">
+                                            <div v-if="picMap[type.value]" class="upload-thumbnail">
+                                                <p>
+                                                    <a v-bind:href="'/imgs/' + picMap[type.value][0].picUrl" target="_blank"
+                                                       style="display: block;height: 100px;overflow: hidden;margin-bottom: 5px;">
+                                                        <img width="100%" v-bind:src="'/imgs/' + picMap[type.value][0].picUrl"/>
+                                                    </a>
+                                                    <a class="btn btn-danger btn-sm">删除</a>
+                                                    <label style="margin-left: 10px">
+                                                        <input type="radio" name="set-main"/> 首图
+                                                    </label>
+                                                </p>
+                                            </div>
+                                            <div class="files" style="display: inline"></div>
+                                            <span class="btn btn-primary btn-sm fileinput-button">
+                                                <i class="fa fa-plus"></i>
+                                                <span>上传</span>
+                                                <input v-bind:id="type.value" type="file" v-bind:data-img-type="type.value"/>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                    <div>
+                        <input type="submit" class="btn btn-primary btn-md btn-flat" value="保存"/>
+                    </div>
+                </form>
             </section>
         </div>
 

@@ -46,8 +46,9 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">城市名</label>
                                     <div class="col-sm-7">
-                                        <select name="cityName" class="form-control" v-model="loupan.cityName" required="">
-                                            <option v-bind:value="p.text" v-for="p in provinces">{{p.text}}</option>
+                                        <select name="cityName" class="form-control"
+                                                v-on:change="onChooseCity" required="">
+                                            <option v-bind:value="p.value" v-for="p in provinces">{{p.text}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -118,7 +119,7 @@
                                         <div class="checkbox">
                                             <template v-for="item in config.layoutType">
                                                 <label style="margin-right: 10px;">
-                                                    <input type="checkbox" name="ageLimits"
+                                                    <input type="checkbox" name="layouts"
                                                            v-on:change="onPropChange(event, item, 'layouts')"/>  {{item.name}}
                                                 </label>
                                             </template>
@@ -221,7 +222,7 @@
                                             <template v-for="item in config.flag">
                                                 <label style="margin-right: 10px;">
                                                     <input type="checkbox" name="flag"
-                                                           v-on:change="onPropChange(event, item, 'flag')"/>  {{item.name}}
+                                                           v-on:change="onPropChange(event, item, 'flags')"/>  {{item.name}}
                                                 </label>
                                             </template>
                                         </div>
@@ -244,7 +245,7 @@
                                     <span class="btn btn-primary btn-sm fileinput-button">
                                         <i class="fa fa-plus"></i>
                                         <span>上传</span>
-                                        <input v-bind:id="type.value" type="file" v-bind:data-type="type.value"/>
+                                        <input v-bind:id="type.value" type="file" v-bind:data-img-type="type.value"/>
                                     </span>
                                 </div>
                             </div>

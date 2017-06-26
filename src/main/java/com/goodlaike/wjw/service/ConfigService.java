@@ -41,7 +41,7 @@ public class ConfigService {
     config.put("statFunction", Stream.of(StatFunction.values()).map((v) -> ImmutableMap.of("name", v.getDisplayName(), "value", v.name()))
         .collect(Collectors.toList()));
     config.put("pictureType",
-        Stream.of(PictureType.values()).map((v) -> ImmutableMap.of("name", v.name(), "value", v.name())).collect(Collectors.toList()));
+        Stream.of(PictureType.values()).map((v) -> ImmutableMap.of("name", v.name(), "value", v.ordinal())).collect(Collectors.toList()));
     config.put("orderType",
         Stream.of(Order.values()).map((v) -> ImmutableMap.of("name", v.name(), "value", v.name())).collect(Collectors.toList()));
     config.put("flag",
