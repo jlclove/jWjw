@@ -31,7 +31,7 @@
         <a href="/admin/login"><b>Admin</b>LTE</a>
     </div>
     <!-- /.login-logo -->
-    <form class="login-box-body">
+    <form action="" class="login-box-body" onsubmit="return onSubmit();">
         <p class="login-box-msg">Sign in to start your session</p>
 
         <div class="form-group has-feedback">
@@ -52,7 +52,7 @@
             </div>
             <!-- /.col -->
             <div class="col-xs-4">
-                <button type="submit" class="btn btn-primary btn-block btn-flat" id="btn-login">登录</button>
+                <button type="submit" class="btn btn-primary btn-block btn-flat">登录</button>
             </div>
             <!-- /.col -->
         </div>
@@ -89,7 +89,7 @@
             increaseArea: '20%' // optional
         });
     });
-    $('#btn-login').click(function(){
+    function onSubmit(){
         $.ajax({
             type: 'post',
             url: '/user/login',
@@ -105,7 +105,8 @@
                 alert('用户名密码错误，请重试')
             }
         })
-    });
+        return false;
+    }
 </script>
 </body>
 </html>

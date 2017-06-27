@@ -12,7 +12,7 @@
         <aside th:replace="admin/fragment/layout :: main-sidebar"></aside>
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper" id="loupan-edit-page">
+        <div class="content-wrapper" id="loupan-edit-page" v-cloak="">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
@@ -26,6 +26,11 @@
             </section>
             <!-- Main content -->
             <section class="content">
+                <div v-if="showSuccess" class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-check"></i> 操作成功!</h4>
+                    3秒后自动跳转到列表页
+                </div>
                 <form class="form-horizontal" id="editForm" action="" method="get">
                     <div class="row">
                         <div class="col-md-6">
@@ -243,15 +248,15 @@
                                     <div class="form-group" v-for="type in config.pictureType">
                                         <label class="col-sm-3 control-label">{{type.name}}</label>
                                         <div class="col-sm-9">
-                                            <div v-if="picMap[type.value]" class="upload-thumbnail">
+                                            <div class="upload-thumbnail" v-for="pic in picMap[type.value]">
                                                 <p>
-                                                    <a v-bind:href="'/imgs/' + picMap[type.value][0].picUrl" target="_blank"
+                                                    <a v-bind:href="'/imgs/' + pic.picUrl" target="_blank"
                                                        style="display: block;height: 100px;overflow: hidden;margin-bottom: 5px;">
-                                                        <img width="100%" v-bind:src="'/imgs/' + picMap[type.value][0].picUrl"/>
+                                                        <img width="100%" v-bind:src="'/imgs/' + pic.picUrl"/>
                                                     </a>
-                                                    <a class="btn btn-danger btn-sm">删除</a>
+                                                    <a class="btn btn-danger btn-sm" v-on:click="deletePic(pic, picMap[type.value])">删除</a>
                                                     <label style="margin-left: 10px">
-                                                        <input type="radio" name="set-main"/> 首图
+                                                        <input type="radio" name="set-main" v-on:change="setMain(pic)" v-bind:checked="pic.main"/> 首图
                                                     </label>
                                                 </p>
                                             </div>

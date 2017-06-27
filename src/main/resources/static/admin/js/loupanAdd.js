@@ -28,6 +28,7 @@ var loupanAdd = new Vue({
                 list.push({text: data[k], value: k})
             }
             that.provinces = list;
+            that.loupan.cityName = list[0].text;
             if(list.length > 0) {
                 $.get('/config/district?id=' + list[0].value, function(data){
                     try {
@@ -97,7 +98,7 @@ var loupanAdd = new Vue({
             });
             $.ajax({
                 type: 'post',
-                url: '/admin/loupan/pic',
+                url: '/admin/loupan/pics',
                 contentType: "application/json",
                 dataType: "json",
                 data: JSON.stringify(this.picList),

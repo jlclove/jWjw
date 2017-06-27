@@ -65,9 +65,19 @@ public class LoupanPictureController extends BaseController {
    * 
    * @see LoupanPictureService#insert(List, int)
    */
-  @RequestMapping(value = "/admin/loupan/pic", method = RequestMethod.POST)
+  @RequestMapping(value = "/admin/loupan/pics", method = RequestMethod.POST)
   public boolean insert(@RequestBody List<Map<String, Object>> picList, HttpServletRequest request) {
     return this.loupanPictureService.insert(picList, super.pollLogined(request).getId());
+  }
+
+  /**
+   * 新增图片 单条
+   *
+   * @see LoupanPictureService#insert(obj, int)
+   */
+  @RequestMapping(value = "/admin/loupan/pic", method = RequestMethod.POST)
+  public int insert(@RequestBody Map<String, Object> picObj, HttpServletRequest request) {
+    return this.loupanPictureService.insert(picObj, super.pollLogined(request).getId());
   }
 
 

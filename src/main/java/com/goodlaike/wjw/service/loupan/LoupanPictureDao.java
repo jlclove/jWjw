@@ -52,6 +52,13 @@ class LoupanPictureDao extends DaoManagement {
     return super.sqlSessionCommon.insert("LoupanPictureMapper.insert", params);
   }
 
+  public int insert(Map<String, Object> picObj, int operator) {
+    Map<String, Object> params = new HashMap<>();
+    params.put("pic", picObj);
+    params.put("operator", operator);
+    return super.sqlSessionCommon.insert("LoupanPictureMapper.insertOne", params);
+  }
+
   /**
    * 删除照片
    * 

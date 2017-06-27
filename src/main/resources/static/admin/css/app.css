@@ -12,8 +12,9 @@ label.error {
 
 .upload-thumbnail {
     display: inline-block;
-    width: 110px;
+    width: 115px;
     height: 150px;
+    padding-right: 5px;
     vertical-align: top
 }
 

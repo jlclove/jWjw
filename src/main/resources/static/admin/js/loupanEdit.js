@@ -107,25 +107,7 @@ var loupanEdit = new Vue({
                 url: '/admin/loupan/' + this.loupan.id,
                 data: this.loupan,
                 success: function(res) {
-                    that.savePic(res);
-                },
-                failure: function(res) {
-                    that.showSuccess = false;
-                }
-            });
-        },
-        savePic: function(id){
-            var that = this;
-            this.picList.forEach(function(item){
-                item.loupanId = id
-            });
-            $.ajax({
-                type: 'post',
-                url: '/admin/loupan/pic',
-                contentType: "application/json",
-                dataType: "json",
-                data: JSON.stringify(this.picList),
-                success: function(res) {
+                    // that.savePic(res);
                     that.showSuccess = true;
                     setTimeout(function(){
                         window.location.href = "/admin/loupans"
@@ -136,11 +118,55 @@ var loupanEdit = new Vue({
                 }
             });
         },
-        setMain: function(pic){
-            this.picList.forEach(function(item){
-                item.main = false;
+        savePic: function(pic){
+            var that = this;
+            $.ajax({
+                type: 'post',
+                url: '/admin/loupan/pic',
+                contentType: "application/json",
+                dataType: "json",
+                data: JSON.stringify(pic),
+                success: function(res) {
+                    pic.id = res;
+                },
+                failure: function(res) {
+                }
             });
-            pic.main = true;
+        },
+        setMain: function(pic){
+            var that = this;
+            $.ajax({
+                type: 'post',
+                url: '/admin/loupan/pic/setMain',
+                data: {id: pic.id},
+                success: function(res) {
+                    that.picList.forEach(function(item){
+                        item.main = false;
+                    });
+                    pic.main = true;
+                },
+                failure: function(res) {
+                    console.log(res);
+                }
+            });
+
+        },
+        deleteImg: function(pic, picList){
+            var that = this;
+            $.ajax({
+                type: 'delete',
+                url: '/admin/loupan/pic?ids=' + pic.id,
+                success: function(res) {
+                    var idx = picList.indexOf(pic);
+                    if(idx >=0) {
+                        picList.splice(idx, 1);
+                    }
+                    console.log(picList);
+                },
+                failure: function(res) {
+                    console.log(res);
+                }
+            });
         },
         onPropChange: function(evt, item, key){
             this.loupan[key] = this.loupan[key] || [];
@@ -232,7 +258,6 @@ var loupanEdit = new Vue({
                 })
                 .on('fileuploaddone', function (e, data) {
                     var file = data.result;
-
                     if (file) {
                         var link = $('<a>')
                             .attr('target', '_blank')
@@ -240,6 +265,8 @@ var loupanEdit = new Vue({
                             .prop('href', '/imgs/' + file);
                         var wrap = $($(data.context.children()[0]).children()[0]).wrap(link);
                         var imgObj = {
+                            loupanId: that.loupan.id,
+                            main: false,
                             type: $(this).data('img-type'),
                             picUrl: file
                         };
@@ -257,6 +284,7 @@ var loupanEdit = new Vue({
                             imgObj.main = false;
                         }
                         that.picList.push(imgObj);
+                        that.savePic(imgObj);
                         // updateFormData();
                     } else if (file.error) {
                         var error = $('<span class="text-danger"/>').text(file.error);

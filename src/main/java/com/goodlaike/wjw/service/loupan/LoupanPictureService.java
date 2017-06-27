@@ -26,7 +26,7 @@ public class LoupanPictureService {
 
   /**
    * 新增楼盘图片
-   * 
+   *
    * @see LoupanPictureDao#insert(List, int)
    */
   public boolean insert(List<Map<String, Object>> picList, int operator) {
@@ -34,6 +34,18 @@ public class LoupanPictureService {
       return true;
     }
     return this.loupanPictureDao.insert(picList, operator) == picList.size();
+  }
+
+  /**
+   * 新增楼盘图片
+   *
+   * @see LoupanPictureDao#insert(List, int)
+   */
+  public int insert(Map<String, Object> picObj, int operator) {
+    if (picObj == null) {
+      return 0;
+    }
+    return this.loupanPictureDao.insert(picObj, operator);
   }
 
   /**

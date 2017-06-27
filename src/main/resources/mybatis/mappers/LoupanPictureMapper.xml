@@ -10,7 +10,7 @@
 
 	<!-- 删除楼盘照片 -->
 	<delete id="delete" parameterType="list">
-		delete loupan_picture 
+		delete from loupan_picture
 		where id in 
 		<foreach collection="list" item="pid" separator="," open="(" close=")">
 			#{pid}
@@ -23,6 +23,15 @@
 		<foreach collection="picList" item="pic" separator=",">
 			(#{pic.loupanId},#{pic.type},#{pic.picUrl},#{pic.main},#{operator})
 		</foreach>
+	</insert>
+
+	<insert id="insertOne" parameterType="map">
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into loupan_picture (loupanId,type,picUrl,main,creator)
+		values
+			(#{pic.loupanId},#{pic.type},#{pic.picUrl},#{pic.main},#{operator})
 	</insert>
 
 	<update id="setMain" parameterType="long">
