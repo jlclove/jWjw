@@ -151,7 +151,8 @@ var loupanEdit = new Vue({
             });
 
         },
-        deleteImg: function(pic, picList){
+        deletePic: function(pic, type){
+            var picList = this.picMap[type];
             var that = this;
             $.ajax({
                 type: 'delete',
@@ -210,6 +211,7 @@ var loupanEdit = new Vue({
                 .on('click', function (e) {
                     var $this = $(this),
                         data = $this.data();
+                    console.log(data);
                     data.context.remove();
                     var img = data.response().result;
                     var idx;
@@ -237,10 +239,11 @@ var loupanEdit = new Vue({
                 .on('fileuploadadd', function (e, data) {
                     var fileWrap = $(e.target).closest('.form-group').find('.files');
                     data.context = $('<div class="upload-thumbnail"/>').appendTo(fileWrap);
+                    data.btnDelete = deleteButton.clone(true).data(data);
                     $.each(data.files, function (index, file) {
                         var node = $('<p/>');
                         if (!index) {
-                            node.append(deleteButton.clone(true).data(data));
+                            node.append(data.btnDelete);
                         }
                         node.appendTo(data.context);
                     });
@@ -285,6 +288,9 @@ var loupanEdit = new Vue({
                         }
                         that.picList.push(imgObj);
                         that.savePic(imgObj);
+                        data.btnDelete.on('click', function(){
+                            that.deletePic(imgObj);
+                        });
                         // updateFormData();
                     } else if (file.error) {
                         var error = $('<span class="text-danger"/>').text(file.error);

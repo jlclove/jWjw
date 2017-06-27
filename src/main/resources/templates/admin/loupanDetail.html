@@ -254,7 +254,7 @@
                                                        style="display: block;height: 100px;overflow: hidden;margin-bottom: 5px;">
                                                         <img width="100%" v-bind:src="'/imgs/' + pic.picUrl"/>
                                                     </a>
-                                                    <a class="btn btn-danger btn-sm" v-on:click="deletePic(pic, picMap[type.value])">删除</a>
+                                                    <a class="btn btn-danger btn-sm" v-on:click="deletePic(pic, type.value)">删除</a>
                                                     <label style="margin-left: 10px">
                                                         <input type="radio" name="set-main" v-on:change="setMain(pic)" v-bind:checked="pic.main"/> 首图
                                                     </label>
