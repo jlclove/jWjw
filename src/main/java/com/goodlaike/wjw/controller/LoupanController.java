@@ -67,7 +67,10 @@ public class LoupanController extends BaseController {
    *      String, String, String, int)
    */
   @RequestMapping(value = "/admin/loupan/{id}", method = RequestMethod.POST)
-  public boolean update(@PathVariable(value = "id") long id, @RequestParam(value = "districtName", required = true) String districtName,
+  public boolean update(@PathVariable(value = "id") long id,
+      @RequestParam(value = "name", required = true) String name,
+      @RequestParam(value = "cityName", required = true) String cityName,
+      @RequestParam(value = "districtName", required = true) String districtName,
       @RequestParam(value = "avgPrice", required = false) Double avgPrice,
       @RequestParam(value = "address", required = false) String address,
       @RequestParam(value = "statFunctions", required = false) String statFunctions,
@@ -89,7 +92,7 @@ public class LoupanController extends BaseController {
       @RequestParam(value = "description", required = false) String description,
       @RequestParam(value = "linkerPhone", required = false) String linkerPhone,
       @RequestParam(value = "flags", required = false) String flags, HttpServletRequest request) {
-    return this.loupanService.update(id, districtName, avgPrice, address, statFunctions, structFunctions, decoItems, ageLimits, layouts,
+    return this.loupanService.update(id, name, cityName, districtName, avgPrice, address, statFunctions, structFunctions, decoItems, ageLimits, layouts,
         developerName, traffic, equipment, siteArea, buildArea, ratio, greenRate, carRate, buildingCnt, roomCnt, propertyFee, propertyName,
         description, linkerPhone, flags, super.pollLogined(request).getId());
   }

@@ -198,12 +198,14 @@ class LoupanDao extends DaoManagement {
    * @version v1
    * @since 2017年5月18日 下午10:13:49
    */
-  public long update(long id, String districtName, Double avgPrice, String address, int statFunctions, int structFunctions, int decoItems,
+  public long update(long id, String name, String cityName, String districtName, Double avgPrice, String address, int statFunctions, int structFunctions, int decoItems,
       int ageLimits, int layouts, String developerName, String traffic, String equipment, Double siteArea, Double buildArea, Double ratio,
       Double greenRate, String carRate, Integer buildingCnt, Integer roomCnt, Double propertyFee, String propertyName, String description,
       String linkerPhone, int flag, int operator) {
     Map<String, Object> params = new HashMap<>(32);
     params.put("id", id);
+    params.put("name", name);
+    params.put("cityName", cityName);
     params.put("districtName", districtName);
     params.put("avgPrice", avgPrice);
     params.put("address", address);

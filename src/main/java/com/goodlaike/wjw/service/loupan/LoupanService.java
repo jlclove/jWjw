@@ -85,11 +85,11 @@ public class LoupanService {
    *      String, Double, Double, Double, Double, String, Integer, Integer, Double, String, String,
    *      String, int)
    */
-  public boolean update(long id, String districtName, Double avgPrice, String address, String statFunctions, String structFunctions,
+  public boolean update(long id, String name, String cityName, String districtName, Double avgPrice, String address, String statFunctions, String structFunctions,
       String decoItems, String ageLimits, String layouts, String developerName, String traffic, String equipment, Double siteArea,
       Double buildArea, Double ratio, Double greenRate, String carRate, Integer buildingCnt, Integer roomCnt, Double propertyFee,
       String propertyName, String description, String linkerPhone, String flags, int operator) {
-    return this.loupanDao.update(id, districtName, avgPrice, address,
+    return this.loupanDao.update(id, name, cityName, districtName, avgPrice, address,
         FlagSupport.enFlag(EnumUtil.valuesOf(StatFunction.class, statFunctions, ",")),
         FlagSupport.enFlag(EnumUtil.valuesOf(StructFunction.class, structFunctions, ",")),
         FlagSupport.enFlag(EnumUtil.valuesOf(DecoItem.class, decoItems, ",")),

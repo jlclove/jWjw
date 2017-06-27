@@ -43,7 +43,7 @@ public class LoupanServiceTest extends BaseTest {
   public void testUpdate() {
     long id = insert();
 
-    assertTrue(this.loupanService.update(id, "什么区域2", null, "这是地址2", null, null,
+    assertTrue(this.loupanService.update(id, "", "" ,"什么区域2", null, "这是地址2", null, null,
         Arrays.asList(DecoItem.毛坯, DecoItem.精装).stream().map((s) -> s.name()).collect(Collectors.joining(",")), null,
         Arrays.asList(LayoutType.一居, LayoutType.三居, LayoutType.五居).stream().map((s) -> s.name()).collect(Collectors.joining(",")), null,
         "交通2", "设施2", 123.5, 1.7, 16.7, null, "乱来2", null, null, null, "物业公司2", "描述2", "13866554411",

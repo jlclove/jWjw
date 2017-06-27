@@ -72,6 +72,8 @@
 	<!-- 更新楼盘 -->
 	<update id="update" parameterType="map">
 	UPDATE `loupan` SET
+					`name` = #{name},
+					`cityName` = #{cityName},
 					`districtName` = #{districtName},
 					`avgPrice` = #{avgPrice},
 					`address` = #{address},

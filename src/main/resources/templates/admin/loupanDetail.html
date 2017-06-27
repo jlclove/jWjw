@@ -48,16 +48,16 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">城市名</label>
-                                            <div class="col-sm-7">
+                                            <div class="col-sm-7" v-if="provinces.length > 0">
                                                 <select name="cityName" class="form-control"
                                                         v-on:change="onChooseCity" required="">
-                                                    <option v-bind:value="p.value" v-for="p in provinces">{{p.text}}</option>
+                                                    <option v-bind:value="p.value" v-for="p in provinces" v-bind:selected="loupan.cityName==p.text">{{p.text}}</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">区域名</label>
-                                            <div class="col-sm-7">
+                                            <div class="col-sm-7" v-if="districts.length > 0">
                                                 <select name="districtName" class="form-control" v-model="loupan.districtName" required="">
                                                     <option v-bind:value="d.name" v-for="d in districts">{{d.name}}</option>
                                                 </select>

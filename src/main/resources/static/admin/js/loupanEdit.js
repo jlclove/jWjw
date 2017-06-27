@@ -29,39 +29,39 @@ var loupanEdit = new Vue({
                 that.initEvent();
             }, 100);
         })
-        $.get('/config/province', function(data){
-            that.provinceMap = data;
-            var list = [];
-            for(var k in data) {
-                list.push({text: data[k], value: k})
+        $.get('/api/loupan/' + loupanId, function(data){
+            that.loupan = data.loupan;
+            that.loupan.statFunctions = data.statFunctionList
+            that.loupan.structFunctions = data.structFunctionList;
+            that.loupan.ageLimits = data.ageLimitList;
+            that.loupan.decoItems = data.decoItemList;
+            that.loupan.layouts = data.layoutTypeList;
+            that.loupan.flags = data.flagList;
+            that.picMap = data.picMap;
+            for(var k in that.picMap) {
+                that.picList = that.picList.concat(that.picMap[k]);
             }
-            that.provinces = list;
-            if(list.length > 0) {
-                $.get('/config/district?id=' + list[0].value, function(data){
-                    try {
-                        that.districts = JSON.parse(data).result[0];
-                        $.get('/api/loupan/' + loupanId, function(data){
-                            that.loupan = data.loupan;
-                            that.loupan.statFunctions = data.statFunctionList
-                            that.loupan.structFunctions = data.structFunctionList;
-                            that.loupan.ageLimits = data.ageLimitList;
-                            that.loupan.decoItems = data.decoItemList;
-                            that.loupan.layouts = data.layoutTypeList;
-                            that.loupan.flags = data.flagList;
-                            that.picMap = data.picMap;
-                            for(var k in that.picMap) {
-                                that.picList = that.picList.concat(that.picMap[k]);
-                            }
-                        });
-                    } catch(e){
-
+            $.get('/config/province', function(data){
+                that.provinceMap = data;
+                var list = [], currentCity;
+                for(var k in data) {
+                    list.push({text: data[k], value: k})
+                    if(data[k] == that.loupan.cityName){
+                        currentCity = k;
                     }
-                })
-            }
-        })
+                }
+                that.provinces = list;
+                if(list.length > 0) {
+                    $.get('/config/district?id=' + currentCity, function(data){
+                        try {
+                            that.districts = JSON.parse(data).result[0];
+                        } catch(e){
 
-
-
+                        }
+                    })
+                }
+            })
+        });
     },
     mounted: function(){
         var that = this;
