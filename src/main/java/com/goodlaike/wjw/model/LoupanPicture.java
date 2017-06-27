@@ -11,88 +11,101 @@ import java.util.Date;
  */
 public class LoupanPicture implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	/**
-	 * 主键ID
-	 */
-	private long id;
+  private static final long serialVersionUID = 1L;
+  /**
+   * 主键ID
+   */
+  private long id;
 
-	/**
-	 * 楼盘ID
-	 */
-	private long loupanId;
+  /**
+   * 楼盘ID
+   */
+  private long loupanId;
 
-	/**
-	 * 图片类型
-	 */
-	private byte type;
+  /**
+   * 图片类型
+   */
+  private byte type;
 
-	/**
-	 * 图片地址
-	 */
-	private String picUrl;
+  /**
+   * 图片地址
+   */
+  private String picUrl;
 
-	/**
-	 * 创建人
-	 */
-	private int creator;
+  /**
+   * 是否主图
+   */
+  private boolean main;
 
-	/**
-	 * 创建时间
-	 */
-	private Date createTime;
+  /**
+   * 创建人
+   */
+  private int creator;
 
-	public long getId() {
-		return this.id;
-	}
+  /**
+   * 创建时间
+   */
+  private Date createTime;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+  public long getId() {
+    return this.id;
+  }
 
-	public long getLoupanId() {
-		return this.loupanId;
-	}
+  public void setId(long id) {
+    this.id = id;
+  }
 
-	public void setLoupanId(long loupanId) {
-		this.loupanId = loupanId;
-	}
+  public long getLoupanId() {
+    return this.loupanId;
+  }
 
-	public byte getType() {
-		return this.type;
-	}
+  public void setLoupanId(long loupanId) {
+    this.loupanId = loupanId;
+  }
 
-	public void setType(byte type) {
-		this.type = type;
-	}
+  public byte getType() {
+    return this.type;
+  }
 
-	public String getPicUrl() {
-		return this.picUrl;
-	}
+  public void setType(byte type) {
+    this.type = type;
+  }
 
-	public void setPicUrl(String picUrl) {
-		this.picUrl = picUrl;
-	}
+  public String getPicUrl() {
+    return this.picUrl;
+  }
 
-	public int getCreator() {
-		return this.creator;
-	}
+  public void setPicUrl(String picUrl) {
+    this.picUrl = picUrl;
+  }
 
-	public void setCreator(int creator) {
-		this.creator = creator;
-	}
+  public boolean isMain() {
+    return this.main;
+  }
 
-	public Date getCreateTime() {
-		return this.createTime;
-	}
+  public void setMain(boolean main) {
+    this.main = main;
+  }
 
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
+  public int getCreator() {
+    return this.creator;
+  }
 
-	@Override
-	public String toString() {
-		return "LoupanPicture [id=" + id + ", loupanId=" + loupanId + ", type=" + type + ", picUrl=" + picUrl
-				+ ", creator=" + creator + ", createTime=" + createTime + "]";
-	}
+  public void setCreator(int creator) {
+    this.creator = creator;
+  }
+
+  public Date getCreateTime() {
+    return this.createTime;
+  }
+
+  public void setCreateTime(Date createTime) {
+    this.createTime = createTime;
+  }
+
+  @Override
+  public String toString() {
+    return "LoupanPicture [id=" + id + ", loupanId=" + loupanId + ", type=" + type + ", picUrl=" + picUrl + ", main=" + main + ", creator="
+        + creator + ", createTime=" + createTime + "]";
+  }
 }
