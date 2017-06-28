@@ -29,9 +29,9 @@
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
-		insert into loupan_picture (loupanId,type,picUrl,main,creator)
+		insert into loupan_picture (loupanId,type,picUrl,creator)
 		values
-			(#{pic.loupanId},#{pic.type},#{pic.picUrl},#{pic.main},#{operator})
+			(#{pic.loupanId},#{pic.type},#{pic.picUrl},#{operator})
 	</insert>
 
 	<update id="setMain" parameterType="long">

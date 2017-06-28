@@ -39,7 +39,7 @@ public class LoupanPictureService {
   /**
    * 新增楼盘图片
    *
-   * @see LoupanPictureDao#insert(List, int)
+   * @see LoupanPictureDao#insert(Map, int)
    */
   public int insert(Map<String, Object> picObj, int operator) {
     if (picObj == null) {

@@ -31,13 +31,14 @@ class LoupanPictureDao extends DaoManagement {
   }
 
   /**
-   * 新增楼盘图片
+   * 新增楼盘图片,批量
    * 
    * @param picList 图片数据集合,需要用到属性如下：
    *        <ul>
    *        <li>loupanId：楼盘Id</li>
    *        <li>type：图片类型</li>
    *        <li>picUrl：图片地址</li>
+   *        <li>main：是否主图</li>
    *        </ul>
    * @param operator 操作人ID
    * @return int
@@ -52,6 +53,21 @@ class LoupanPictureDao extends DaoManagement {
     return super.sqlSessionCommon.insert("LoupanPictureMapper.insert", params);
   }
 
+  /**
+   * 新增楼盘图片
+   * 
+   * @param picObj 图片数据,需要用到属性如下：
+   *        <ul>
+   *        <li>loupanId：楼盘Id</li>
+   *        <li>type：图片类型</li>
+   *        <li>picUrl：图片地址</li>
+   *        </ul>
+   * @param operator 操作人ID
+   * @return int
+   * @author Jail Hu
+   * @version v1
+   * @since 2017年5月18日 下午10:13:49
+   */
   public int insert(Map<String, Object> picObj, int operator) {
     Map<String, Object> params = new HashMap<>();
     params.put("pic", picObj);
