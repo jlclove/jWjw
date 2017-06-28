@@ -56,7 +56,8 @@ class LoupanPictureDao extends DaoManagement {
     Map<String, Object> params = new HashMap<>();
     params.put("pic", picObj);
     params.put("operator", operator);
-    return super.sqlSessionCommon.insert("LoupanPictureMapper.insertOne", params);
+    super.sqlSessionCommon.insert("LoupanPictureMapper.insertOne", params);
+    return (Integer) params.get("id");
   }
 
   /**
