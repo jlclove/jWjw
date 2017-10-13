@@ -2,7 +2,7 @@ package com.goodlaike.wjw.dict;
 
 public enum Province {
 
-  上海("上海市",310000),江苏("江苏省",320000);
+  上海("上海市",310000),江苏("江苏省",320000),浙江("浙江省",330000);
 
   private final String displayName;
 
